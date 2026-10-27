@@ -1,0 +1,18 @@
+# Operating system and editor artifacts
+.DS_Store
+Thumbs.db
+*.swp
+*~
+.directory
+
+# Obsidian local settings
+.obsidian/
+
+# Build and python artifacts
+__pycache__/
+*.pyc
+
+# Prompt and internal agent style guides
+STYLE_GUIDE.md
+GEMINI.md
+verify_vaults.py

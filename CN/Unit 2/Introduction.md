@@ -1,0 +1,33 @@
+# Unit 2: Application Infrastructure, Sockets, and Transport-Layer Reliability
+
+Welcome to Unit 2 of Computer Networks.
+
+In Unit 1, we traversed the foundational architecture of the Internet—from access networks, physical media, and packet-switched routing to the layered protocol stack and core web protocols like HTTP and HTTPS. Throughout that study, we operated under two enormous, convenient assumptions:
+1. Whenever a client wished to talk to `www.example.com`, it magically possessed the numerical IP address required to stamp into an IP datagram.
+2. Whenever an application handed a byte stream to the operating system, those bytes somehow navigated noisy, lossy, multi-hop packet networks and arrived intact at the exact target process on the destination host.
+
+In Unit 2, we peel back both of these abstractions.
+
+We begin at the network edge with the invisible infrastructure that makes human interaction with the Internet possible: the **Domain Name System (DNS)**, the distributed economics of **Peer-to-Peer (P2P) file sharing**, and the low-level **Socket Programming API** through which software processes actually communicate across the network boundary. 
+
+From there, we cross the threshold into **Layer 4: The Transport Layer**. Here, we investigate how the transport layer bridges the gap between raw, host-to-host datagram delivery (the network layer) and process-to-process communication. We analyze how multiplexing and demultiplexing direct packets to specific sockets, dissect the lightweight minimalism of **UDP** and the **Internet Checksum**, and embark on a rigorous, step-by-step mathematical synthesis of **Reliable Data Transfer (rdt 1.0 through rdt 3.0)**, uncovering why stop-and-wait ARQ destroys line utilization and why pipelining is mathematically mandatory.
+
+---
+
+## Unit 2 Roadmap
+
+The lectures in this unit are structured across nine dedicated decks:
+
+- [**L01: Domain Name System (DNS)**](L01%20-%20Domain%20Name%20System%20%28DNS%29.md) — The distributed, hierarchical naming architecture of the Internet. Root, TLD, and authoritative name servers; iterated vs. recursive resolution queries; local DNS resolvers, caching, and TTL invalidation; DNS Resource Record (RR) formats (`A`, `NS`, `CNAME`, `MX`); wire-format query/reply message headers; and security vulnerabilities (cache poisoning, spoofing, DNSSEC).
+- [**L02: Peer-to-Peer Applications and BitTorrent**](L02%20-%20Peer-to-Peer%20Applications%20and%20BitTorrent.md) — Client-server scalability bottlenecks vs. peer-to-peer distribution. Mathematical models of file distribution time ($D_{\text{cs}}$ vs. $D_{\text{p2p}}$); BitTorrent architecture (torrents, trackers, swarms, 256 KB chunks); rarest-first chunk selection; tit-for-tat incentive mechanisms and optimistic unchoking dynamics.
+- [**L03: Socket Programming with UDP and TCP**](L03%20-%20Socket%20Programming%20with%20UDP%20and%20TCP.md) — The operating system interface between user processes and kernel transport buffers. Python implementation of connectionless UDP sockets (`SOCK_DGRAM`, `sendto`, `recvfrom`) and connection-oriented TCP sockets (`SOCK_STREAM`, welcoming/listening sockets, `bind`, `listen`, `accept`, `connect`, `send`, `recv`); concurrency and state models.
+- [**L04: Electronic Mail, FTP, and Other Application Protocols**](L04%20-%20Electronic%20Mail%2C%20FTP%2C%20and%20Other%20Application%20Protocols.md) — High-level application protocol comparison. Electronic mail architecture (user agents, mail servers, SMTP push protocol over persistent TCP, POP3/IMAP/HTTP pull mechanisms); File Transfer Protocol (FTP, dual-channel out-of-band architecture on ports 20 and 21); Dynamic Host Configuration Protocol (DHCP, DORA exchange on UDP 67/68); Simple Network Management Protocol (SNMP, UDP 161/162); Telnet (TCP 23) vs. SSH (TCP 22).
+- [**L05: Transport Layer Services and Principles**](L05%20-%20Transport%20Layer%20Services%20and%20Principles.md) — Scope and boundaries of Layer 4. Logical communication between application processes vs. host-to-host delivery; the classic Ann and Bill household analogy; sender transport actions (segmentation, header attachment) vs. receiver actions (reassembly, error checking, demultiplexing); relationship to the best-effort IP network layer.
+- [**L06: Multiplexing and Demultiplexing**](L06%20-%20Multiplexing%20and%20Demultiplexing.md) — Directing segments to the right process. Transport header port fields; connectionless demultiplexing in UDP using 2-tuples `(Destination IP, Destination Port)`; connection-oriented demultiplexing in TCP using 4-tuples `(Source IP, Source Port, Destination IP, Destination Port)`; socket demux in concurrent, multi-threaded web servers on port 80/443.
+- [**L07: Connectionless Transport - UDP and Internet Checksum**](L07%20-%20Connectionless%20Transport%20-%20UDP%20and%20Internet%20Checksum.md) — The philosophy of minimalist transport. Why UDP exists (no setup latency, zero rate throttling, small overhead); the 8-byte UDP segment header; step-by-step mechanics of the 16-bit 1's complement Internet Checksum; handling arithmetic overflow wraparound; fundamental error-detection limitations of 1's complement addition.
+- [**L08: Principles of Reliable Data Transfer - rdt 1.0 to rdt 2.2**](L08%20-%20Principles%20of%20Reliable%20Data%20Transfer%20-%20rdt%201.0%20to%20rdt%202.2.md) — Incremental finite-state machine (FSM) synthesis over unreliable channels. `rdt 1.0` (perfect channel); `rdt 2.0` (channel with bit errors, Stop-and-Wait ARQ, positive ACKs, negative NAKs); the fatal flaw of corrupted feedback; `rdt 2.1` (handling corrupted feedback with alternating 1-bit sequence numbers 0 and 1); `rdt 2.2` (eliminating NAKs via duplicate ACKs).
+- [**L09: Principles of Reliable Data Transfer - rdt 3.0 and Pipelining**](L09%20-%20Principles%20of%20Reliable%20Data%20Transfer%20-%20rdt%203.0%20and%20Pipelining.md) — Conquering packet loss and transmission latency. `rdt 3.0` (the alternating-bit protocol over lossy channels, countdown timers, retransmission scenarios); calculating sender utilization ($U_{\text{sender}}$) and demonstrating the catastrophic stop-and-wait throughput collapse ($U \approx 0.027\%$); introducing pipelining, sliding windows, and the intuition for Go-Back-N (GBN) and Selective Repeat (SR).
+
+---
+
+The unifying mental model for Unit 2 is **tracing a single application message from inception to reception**: how its hostname is resolved through the DNS hierarchy, how it is handed across the socket boundary, how transport headers are multiplexed, and how finite-state reliability machines guarantee that every single byte survives the packet-switched wilderness.

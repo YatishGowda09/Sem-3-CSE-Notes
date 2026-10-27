@@ -1,0 +1,50 @@
+# Mathematical Foundation for AI & Data Science: Master Topic Index
+
+Please refer to the comprehensive [README.md](README.md) for the complete visual architectural map and master curriculum.
+
+## Quick Unit Links
+
+- [Unit 1: Systems of Linear Equations, Vector Spaces, and Fundamental Subspaces](Unit%201/Introduction.md)
+  - [L01 - Systems of Linear Equations and Matrix Representation](Unit%201/L01%20-%20Systems%20of%20Linear%20Equations%20and%20Matrix%20Representation.md)
+  - [L02 - Gaussian Elimination and Row Echelon Form](Unit%201/L02%20-%20Gaussian%20Elimination%20and%20Row%20Echelon%20Form.md)
+  - [L03 - Matrix Rank and Consistency of Linear Systems](Unit%201/L03%20-%20Matrix%20Rank%20and%20Consistency%20of%20Linear%20Systems.md)
+  - [L04 - LU Decomposition](Unit%201/L04%20-%20LU%20Decomposition.md)
+  - [L05 - Matrix Inversion by Gauss-Jordan Elimination](Unit%201/L05%20-%20Matrix%20Inversion%20by%20Gauss-Jordan%20Elimination.md)
+  - [L06 - Vector Spaces and Subspaces](Unit%201/L06%20-%20Vector%20Spaces%20and%20Subspaces.md)
+  - [L07 - Linear Independence, Basis, and Dimension](Unit%201/L07%20-%20Linear%20Independence,%20Basis,%20and%20Dimension.md)
+  - [L08 - The Four Fundamental Subspaces](Unit%201/L08%20-%20The%20Four%20Fundamental%20Subspaces.md)
+  - [L09 - Linear Transformations](Unit%201/L09%20-%20Linear%20Transformations.md)
+
+- [Unit 2: Orthogonality, Eigenvalues, and Matrix Factorizations](Unit%202/Introduction.md)
+  - [L01 - Dot Product, Vector Norms, and Orthogonality](Unit%202/L01%20-%20Dot%20Product,%20Vector%20Norms,%20and%20Orthogonality.md)
+  - [L02 - Orthogonal Complements and Fundamental Subspaces](Unit%202/L02%20-%20Orthogonal%20Complements%20and%20Fundamental%20Subspaces.md)
+  - [L03 - Projections onto Lines and Subspaces](Unit%202/L03%20-%20Projections%20onto%20Lines%20and%20Subspaces.md)
+  - [L04 - Least Squares Approximations](Unit%202/L04%20-%20Least%20Squares%20Approximations.md)
+  - [L05 - The Gram-Schmidt Process and QR Factorization](Unit%202/L05%20-%20The%20Gram-Schmidt%20Process%20and%20QR%20Factorization.md)
+  - [L06 - Introduction to Eigenvalues and Eigenvectors](Unit%202/L06%20-%20Introduction%20to%20Eigenvalues%20and%20Eigenvectors.md)
+  - [L07 - Diagonalization of a Matrix](Unit%202/L07%20-%20Diagonalization%20of%20a%20Matrix.md)
+  - [L08 - Symmetric Matrices and the Spectral Theorem](Unit%202/L08%20-%20Symmetric%20Matrices%20and%20the%20Spectral%20Theorem.md)
+  - [L09 - Singular Value Decomposition and PCA Foundations](Unit%202/L09%20-%20Singular%20Value%20Decomposition%20and%20PCA%20Foundations.md)
+
+- [Unit 3: Probability Modeling and Parameter Estimation](Unit%203/Introduction.md)
+  - [L01 - Introduction to Probability Modeling and Sampling](Unit%203/L01%20-%20Introduction%20to%20Probability%20Modeling%20and%20Sampling.md)
+  - [L02 - Random Variables and Probability Distributions](Unit%203/L02%20-%20Random%20Variables%20and%20Probability%20Distributions.md)
+  - [L03 - Common Probability Distributions](Unit%203/L03%20-%20Common%20Probability%20Distributions.md)
+  - [L04 - Multivariate Distributions and Independence](Unit%203/L04%20-%20Multivariate%20Distributions%20and%20Independence.md)
+  - [L05 - The Central Limit Theorem](Unit%203/L05%20-%20The%20Central%20Limit%20Theorem.md)
+  - [L06 - Principles of Point Estimation](Unit%203/L06%20-%20Principles%20of%20Point%20Estimation.md)
+  - [L07 - Maximum Likelihood Estimation](Unit%203/L07%20-%20Maximum%20Likelihood%20Estimation.md)
+  - [L08 - Maximum A Posteriori and Multivariate Normal](Unit%203/L08%20-%20Maximum%20A%20Posteriori%20and%20Multivariate%20Normal.md)
+  - [L09 - Interval Estimation and Confidence Intervals](Unit%203/L09%20-%20Interval%20Estimation%20and%20Confidence%20Intervals.md)
+  - [L10 - Student's t-Distribution and Small Sample Intervals](Unit%203/L10%20-%20Student's%20t-Distribution%20and%20Small%20Sample%20Intervals.md)
+
+- [Unit 4: Hypothesis Testing and Statistical Inference](Unit%204/Introduction.md)
+  - [L01 - Foundations of Hypothesis Testing](Unit%204/L01%20-%20Foundations%20of%20Hypothesis%20Testing.md)
+  - [L02 - Large-Sample Tests for a Population Mean](Unit%204/L02%20-%20Large-Sample%20Tests%20for%20a%20Population%20Mean.md)
+  - [L03 - Confidence Intervals and Hypothesis Testing Relationship](Unit%204/L03%20-%20Confidence%20Intervals%20and%20Hypothesis%20Testing%20Relationship.md)
+  - [L04 - Small-Sample Tests for a Population Mean](Unit%204/L04%20-%20Small-Sample%20Tests%20for%20a%20Population%20Mean.md)
+  - [L05 - Type I and Type II Errors](Unit%204/L05%20-%20Type%20I%20and%20Type%20II%20Errors.md)
+  - [L06 - Power of a Test and Factors Affecting Power](Unit%204/L06%20-%20Power%20of%20a%20Test%20and%20Factors%20Affecting%20Power.md)
+  - [L07 - Analysis of Variance - One-Way ANOVA](Unit%204/L07%20-%20Analysis%20of%20Variance%20-%20One-Way%20ANOVA.md)
+  - [L08 - Chi-Square Goodness-of-Fit Test](Unit%204/L08%20-%20Chi-Square%20Goodness-of-Fit%20Test.md)
+  - [L09 - Chi-Square Tests of Independence and Homogeneity](Unit%204/L09%20-%20Chi-Square%20Tests%20of%20Independence%20and%20Homogeneity.md)

@@ -1,0 +1,50 @@
+# Data Structures and Applications: Master Topic Index
+
+Please refer to the comprehensive [README.md](README.md) for the complete visual architectural map and master curriculum.
+
+## Quick Unit Links
+
+- [Unit 1: Pointers, Memory Allocation, Linked Lists, and Stacks](Unit%201/Introduction.md)
+  - [L01 - Review of Pointers and Dynamic Memory Allocation](Unit%201/L01%20-%20Review%20of%20Pointers%20and%20Dynamic%20Memory%20Allocation.md)
+  - [L02 - Structures and Abstract Data Types](Unit%201/L02%20-%20Structures%20and%20Abstract%20Data%20Types.md)
+  - [L03 - Singly Linked Lists - Fundamentals and Insertion](Unit%201/L03%20-%20Singly%20Linked%20Lists%20-%20Fundamentals%20and%20Insertion.md)
+  - [L04 - Singly Linked Lists - Deletion and Traversal](Unit%201/L04%20-%20Singly%20Linked%20Lists%20-%20Deletion%20and%20Traversal.md)
+  - [L05 - Header Linked Lists and Circular Header Nodes](Unit%201/L05%20-%20Header%20Linked%20Lists%20and%20Circular%20Header%20Nodes.md)
+  - [L06 - Polynomial Representation and Arithmetic](Unit%201/L06%20-%20Polynomial%20Representation%20and%20Arithmetic.md)
+  - [L07 - Specialized Lists - Multilists and Skip Lists](Unit%201/L07%20-%20Specialized%20Lists%20-%20Multilists%20and%20Skip%20Lists.md)
+  - [L08 - Stacks - Representation and Operations](Unit%201/L08%20-%20Stacks%20-%20Representation%20and%20Operations.md)
+  - [L09 - Applications of Stacks - Infix, Prefix, and Postfix](Unit%201/L09%20-%20Applications%20of%20Stacks%20-%20Infix,%20Prefix,%20and%20Postfix.md)
+  - [L10 - Applications of Stacks - Function Calls and Recursion](Unit%201/L10%20-%20Applications%20of%20Stacks%20-%20Function%20Calls%20and%20Recursion.md)
+
+- [Unit 2: Circular Lists, Queues, and Trees](Unit%202/Introduction.md)
+  - [L01 - Circular Linked Lists](Unit%202/L01%20-%20Circular%20Linked%20Lists.md)
+  - [L02 - Doubly Linked Lists](Unit%202/L02%20-%20Doubly%20Linked%20Lists.md)
+  - [L03 - Linear Queues - Array and Linked Implementations](Unit%202/L03%20-%20Linear%20Queues%20-%20Array%20and%20Linked%20Implementations.md)
+  - [L04 - Circular Queues](Unit%202/L04%20-%20Circular%20Queues.md)
+  - [L05 - Deques and Priority Queues](Unit%202/L05%20-%20Deques%20and%20Priority%20Queues.md)
+  - [L06 - Applications of Queues](Unit%202/L06%20-%20Applications%20of%20Queues.md)
+  - [L07 - Introduction to Trees and Terminology](Unit%202/L07%20-%20Introduction%20to%20Trees%20and%20Terminology.md)
+  - [L08 - Binary Trees - Properties and Representations](Unit%202/L08%20-%20Binary%20Trees%20-%20Properties%20and%20Representations.md)
+  - [L09 - Forests and Conversion to Binary Trees](Unit%202/L09%20-%20Forests%20and%20Conversion%20to%20Binary%20Trees.md)
+
+- [Unit 3: Advanced Trees and Heaps](Unit%203/Introduction.md)
+  - [L01 - Binary Tree Traversals](Unit%203/L01%20-%20Binary%20Tree%20Traversals.md)
+  - [L02 - Expression Trees](Unit%203/L02%20-%20Expression%20Trees.md)
+  - [L03 - Threaded Binary Trees](Unit%203/L03%20-%20Threaded%20Binary%20Trees.md)
+  - [L04 - Binary Search Trees - Insertion and Search](Unit%203/L04%20-%20Binary%20Search%20Trees%20-%20Insertion%20and%20Search.md)
+  - [L05 - Binary Search Trees - Deletion](Unit%203/L05%20-%20Binary%20Search%20Trees%20-%20Deletion.md)
+  - [L06 - AVL Trees - Balanced Search Trees](Unit%203/L06%20-%20AVL%20Trees%20-%20Balanced%20Search%20Trees.md)
+  - [L07 - AVL Rotations](Unit%203/L07%20-%20AVL%20Rotations.md)
+  - [L08 - Splay Trees](Unit%203/L08%20-%20Splay%20Trees.md)
+  - [L09 - Binary Heaps and Heap Sort](Unit%203/L09%20-%20Binary%20Heaps%20and%20Heap%20Sort.md)
+
+- [Unit 4: Graphs and Hashing](Unit%204/Introduction.md)
+  - [L01 - Graph Fundamentals and Representations](Unit%204/L01%20-%20Graph%20Fundamentals%20and%20Representations.md)
+  - [L02 - Breadth-First Search](Unit%204/L02%20-%20Breadth-First%20Search.md)
+  - [L03 - Depth-First Search](Unit%204/L03%20-%20Depth-First%20Search.md)
+  - [L04 - Graph Connectivity and Cycle Detection](Unit%204/L04%20-%20Graph%20Connectivity%20and%20Cycle%20Detection.md)
+  - [L05 - Shortest Path Algorithms - Dijkstra](Unit%204/L05%20-%20Shortest%20Path%20Algorithms%20-%20Dijkstra.md)
+  - [L06 - Hashing - Fundamentals and Hash Functions](Unit%204/L06%20-%20Hashing%20-%20Fundamentals%20and%20Hash%20Functions.md)
+  - [L07 - Collision Resolution - Open Hashing](Unit%204/L07%20-%20Collision%20Resolution%20-%20Open%20Hashing.md)
+  - [L08 - Collision Resolution - Closed Hashing](Unit%204/L08%20-%20Collision%20Resolution%20-%20Closed%20Hashing.md)
+  - [L09 - Tries - Prefix Trees](Unit%204/L09%20-%20Tries%20-%20Prefix%20Trees.md)
