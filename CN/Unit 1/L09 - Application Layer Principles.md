@@ -120,8 +120,8 @@ flowchart TD
         TRANS --- NET --- NIC
     end
 
-    APP <==>"[Socket API: send(), recv()]" SOCK
-    SOCK <==> TRANS
+    APP <-->"[Socket API: send(), recv()]" SOCK
+    SOCK <--> TRANS
 ```
 
 ### The Doorway Analogy

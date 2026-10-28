@@ -29,11 +29,11 @@ flowchart TD
         ALU["Arithmetic and Logic Unit (ALU)"]
         CU["Control Unit (Generates Gating Signals)"]
 
-        BUS <==> PC
+        BUS <--> PC
         BUS --> MAR
-        BUS <==> MDR
+        BUS <--> MDR
         BUS --> IR
-        BUS <==> GPR
+        BUS <--> GPR
         BUS --> TEMP_Y
         TEMP_Z --> BUS
 
@@ -45,7 +45,7 @@ flowchart TD
     end
 
     MAR -- "Address Lines" --> EXT_MEM["External Memory System"]
-    EXT_MEM <== "Data Lines" ==> MDR
+    EXT_MEM <-->|"Data Lines"| MDR
 ```
 
 Notice the layout:

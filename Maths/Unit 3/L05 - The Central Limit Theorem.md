@@ -17,15 +17,15 @@ To understand the Central Limit Theorem without confusion, we must draw an unamb
 ```mermaid
 flowchart TD
     subgraph PopLevel ["Level 1: Population Distribution"]
-        Pop["Population Distribution of X\n• Shape can be anything: Exponential, Skewed, Uniform, Bimodal\n• Parameters: Mean μ, Variance σ²\n• Describes INDIVIDUAL entities"]
+        Pop["Population Distribution of X<br/>• Shape can be anything: Exponential, Skewed, Uniform, Bimodal<br/>• Parameters: Mean μ, Variance σ²<br/>• Describes INDIVIDUAL entities"]
     end
 
     subgraph SampleLevel ["Level 2: Realized Sample"]
-        Samp["Observed Sample: (x₁, x₂, ..., xₙ)\n• Size n drawn i.i.d. from Population"]
+        Samp["Observed Sample: (x₁, x₂, ..., xₙ)<br/>• Size n drawn i.i.d. from Population"]
     end
 
     subgraph SamplingDistLevel ["Level 3: Sampling Distribution of the Statistic"]
-        SampDist["Sampling Distribution of the Sample Mean X̄\n• Distribution of X̄ across ALL conceivable samples of size n\n• Center: E[X̄] = μ\n• Variance: Var(X̄) = σ² / n\n• Shape: Approaches Gaussian as n → ∞"]
+        SampDist["Sampling Distribution of the Sample Mean X̄<br/>• Distribution of X̄ across ALL conceivable samples of size n<br/>• Center: E[X̄] = μ<br/>• Variance: Var(X̄) = σ² / n<br/>• Shape: Approaches Gaussian as n → ∞"]
     end
 
     Pop -->|"Draw sample of size n"| Samp
@@ -90,10 +90,10 @@ $$\text{SE}(\bar{X}) = \sqrt{\text{Var}(\bar{X})} = \frac{\sigma}{\sqrt{n}}$$
 
 ```mermaid
 flowchart LR
-    n1["Sample Size n = 1\nSE = σ / 1 = 1.00σ\nWide Dispersion"]
-    n4["Sample Size n = 4\nSE = σ / √4 = 0.50σ\nHalf the Spread"]
-    n16["Sample Size n = 16\nSE = σ / √16 = 0.25σ\nQuarter the Spread"]
-    n64["Sample Size n = 64\nSE = σ / √64 = 0.125σ\nTight Concentration"]
+    n1["Sample Size n = 1<br/>SE = σ / 1 = 1.00σ<br/>Wide Dispersion"]
+    n4["Sample Size n = 4<br/>SE = σ / √4 = 0.50σ<br/>Half the Spread"]
+    n16["Sample Size n = 16<br/>SE = σ / √16 = 0.25σ<br/>Quarter the Spread"]
+    n64["Sample Size n = 64<br/>SE = σ / √64 = 0.125σ<br/>Tight Concentration"]
 
     n1 --> n4 --> n16 --> n64
 ```

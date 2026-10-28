@@ -22,12 +22,12 @@ At the sending node, data $D$ (comprising $d$ bits of network-layer payload and 
 flowchart LR
     subgraph SenderNode["Sending Node"]
         DataD["Data Payload: D (d bits)"] --> EDCEngine["Compute EDC Bits (r bits)"]
-        EDCEngine --> TransmitFrame["Transmitted Frame: < D , EDC >"]
+        EDCEngine --> TransmitFrame["Transmitted Frame: &lt; D , EDC &gt;"]
     end
     
     TransmitFrame --> Channel["Bit-Error Prone Physical Channel<br/>(Noise flips bits!)"]
     
-    Channel --> RecvFrame["Received Frame: < D' , EDC' >"]
+    Channel --> RecvFrame["Received Frame: &lt; D' , EDC' &gt;"]
     
     subgraph ReceiverNode["Receiving Node"]
         RecvFrame --> CheckEngine["Error Verification Engine"]

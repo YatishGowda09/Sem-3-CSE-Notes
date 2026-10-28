@@ -217,8 +217,8 @@ Because Euclidean distance assumes all features have equal variance and are comp
 ```mermaid
 flowchart TD
     subgraph DistCompare ["Distance Geometry in 2D"]
-        Euclid["Euclidean Distance: (x - μ)ᵀ I (x - μ)\nContour: Perfect Circle\nAssumes isotropic, uncorrelated variance"]
-        Mahal["Mahalanobis Distance: (x - μ)ᵀ Σ⁻¹ (x - μ)\nContour: Tilted Ellipsoid\nCorrects for feature variance and correlation"]
+        Euclid["Euclidean Distance: (x - μ)ᵀ I (x - μ)<br/>Contour: Perfect Circle<br/>Assumes isotropic, uncorrelated variance"]
+        Mahal["Mahalanobis Distance: (x - μ)ᵀ Σ⁻¹ (x - μ)<br/>Contour: Tilted Ellipsoid<br/>Corrects for feature variance and correlation"]
     end
 ```
 

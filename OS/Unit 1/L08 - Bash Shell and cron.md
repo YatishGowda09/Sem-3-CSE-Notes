@@ -40,7 +40,7 @@ sequenceDiagram
 
     User->>Shell: Types "ls -l" and presses Enter
     Shell->>Shell: Parses line into command ("ls") and args (["ls", "-l"])
-    Shell->>Shell: Searches $PATH directories to find /bin/ls
+    Shell->>Shell: Searches PATH directories to find /bin/ls
     Shell->>Kernel: Calls fork()
     Kernel-->>Shell: Returns Child PID (e.g. 7102)
     Kernel-->>Child: Child created (Returns 0)
@@ -54,8 +54,8 @@ sequenceDiagram
     Child->>Child: Executes ls logic & prints directory contents
     Child->>Kernel: Calls exit(0)
     Kernel->>Shell: Wakes up parent with exit status (0)!
-    Shell->>Shell: Saves return code into $? variable
-    Shell->>User: Displays prompt for next command ($ )
+    Shell->>Shell: Saves return code into exit status variable ($?)
+    Shell->>User: Displays prompt for next command (bash$)
 ```
 
 Look at how our earlier theory connects:

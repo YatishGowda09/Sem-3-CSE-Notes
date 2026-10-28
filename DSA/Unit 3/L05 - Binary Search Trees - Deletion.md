@@ -91,8 +91,8 @@ Because the target's parent has only **one** pointer slot available (`left` or `
 ```mermaid
 graph TD
     Root["50 (Target Node to Delete)"]
-    Root --> LSub["Left Subtree (Keys < 50)"]
-    Root --> RSub["Right Subtree (Keys > 50)"]
+    Root --> LSub["Left Subtree (Keys &lt; 50)"]
+    Root --> RSub["Right Subtree (Keys &gt; 50)"]
 ```
 
 To resolve this without tearing down the tree structure, we use a replacement strategy:

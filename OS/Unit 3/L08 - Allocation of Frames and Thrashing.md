@@ -136,7 +136,7 @@ flowchart LR
         CPU1["CPU Socket 1"] <-->|"Fast (Local Bus)"| RAM1["Local Memory 1"]
     end
 
-    CPU0 <===>|"Slow (Interconnect Bus)"| RAM1
+    CPU0 <-->|"Slow (Interconnect Bus)"| RAM1
 ```
 
 A CPU can access its own **local memory** in nanoseconds. But accessing memory physically wired to another CPU socket across the interconnect bus takes significantly longer.
@@ -181,12 +181,20 @@ flowchart TD
 8. Everyone faults harder. The disk queue explodes. CPU utilization plunges to near zero.
 
 ```mermaid
-xychart-beta
-    title "CPU Utilization vs Degree of Multiprogramming"
-    x-axis ["Low", "Moderate", "Optimal (Peak)", "Thrashing Starts", "Severe Thrashing"]
-    y-axis "CPU Utilization (%)" 0 --> 100
-    line [15, 60, 92, 40, 5]
-```
+flowchart LR
+    subgraph PHASE1["Phase 1: Underutilization"]
+        direction TB
+        U1["Low Multiprogramming<br/>CPU: 15% (Processes idle waiting on I/O)"]
+    end
+    subgraph PHASE2["Phase 2: Optimal Peak"]
+        direction TB
+        U2["Optimal Multiprogramming<br/>CPU: 92% (High concurrency, few page faults)"]
+    end
+    subgraph PHASE3["Phase 3: Thrashing Collapse"]
+        direction TB
+        U3["Over-allocation: Thrashing Starts<br/>CPU drops to 40% (Processes queue for paging)"] --> U4["Severe Thrashing<br/>CPU drops to 5% (100% Disk Paging, 0% Work)"]
+    end
+    PHASE1 -->|Add processes| PHASE2 -->|Add more processes| PHASE3```
 
 The system becomes completely unresponsive. The disk light stays solid on, the mouse cursor freezes, and typing in a terminal does nothing. That is thrashing.
 
@@ -210,9 +218,9 @@ $$\text{Total Demand for Frames } (D) = \sum \text{WSS}_i$$
 
 ```mermaid
 flowchart TD
-    CALC["Calculate Total Memory Demand: D = sum(WSS)"] --> CHK{"Is D > Total Available Frames m?"}
-    CHK -- "No (D <= m)" --> SAFE["Safe! All processes have their working sets in RAM.<br>Zero thrashing."]
-    CHK -- "Yes (D > m)" --> DANGER["DANGER: Thrashing Imminent!<br>OS must SUSPEND a process & free its frames!"]
+    CALC["Calculate Total Memory Demand: D = sum(WSS)"] --> CHK{"Is D &gt; Total Available Frames m?"}
+    CHK -- "No (D &le; m)" --> SAFE["Safe! All processes have their working sets in RAM.<br>Zero thrashing."]
+    CHK -- "Yes (D &gt; m)" --> DANGER["DANGER: Thrashing Imminent!<br>OS must SUSPEND a process & free its frames!"]
 ```
 
 If $D > m$, total memory demand exceeds physical RAM. **Thrashing is guaranteed.**

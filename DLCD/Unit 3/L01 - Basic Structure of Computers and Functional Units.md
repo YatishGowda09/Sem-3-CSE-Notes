@@ -113,7 +113,7 @@ flowchart TD
 
     PC --> MAR
     MAR -- "Address Lines" --> SYS_MEM["Main Memory"]
-    SYS_MEM <== "Data Lines" ==> MDR
+    SYS_MEM <-->|"Data Lines"| MDR
     MDR --> IR
     IR --> CU
     MDR <--> GPR
@@ -166,9 +166,9 @@ A system bus is partitioned into three functionally distinct line groups:
 
 ```mermaid
 flowchart LR
-    CPU["CPU"] <===> ABUS["Address Bus (Unidirectional: CPU -> Devices)"] <===> MEM["Memory / I/O"]
-    CPU <===> DBUS["Data Bus (Bidirectional)"] <===> MEM
-    CPU <===> CBUS["Control Bus (Read, Write, Clock, IRQ)"] <===> MEM
+    CPU["CPU"] <--> ABUS["Address Bus (Unidirectional: CPU -> Devices)"] <--> MEM["Memory / I/O"]
+    CPU <--> DBUS["Data Bus (Bidirectional)"] <--> MEM
+    CPU <--> CBUS["Control Bus (Read, Write, Clock, IRQ)"] <--> MEM
 ```
 
 1. **Address Bus**: Carries the physical address from the CPU to memory and peripheral interfaces. It is unidirectional. If an address bus has $k$ parallel lines, the CPU can uniquely address $2^k$ distinct memory locations. (A 32-bit address bus can access $2^{32} = 4\text{ GB}$; a 64-bit bus can access $16\text{ Exabytes}$).

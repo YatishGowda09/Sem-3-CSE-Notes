@@ -135,7 +135,7 @@ flowchart TD
     CHECK_INF -- "Yes" --> INF["Infinity (±∞)"]
     CHECK_INF -- "No" --> NAN["Not a Number (NaN)"]
 
-    EXP -- "1 <= e <= 254" --> NORM["Normalized Numbers: (-1)^s × (1.f) × 2^(e-127)"]
+    EXP -- "1 &le; e &le; 254" --> NORM["Normalized Numbers: (-1)^s × (1.f) × 2^(e-127)"]
 
     EXP -- "e = 0 (All 0s)" --> CHECK_ZERO{"Fraction (f) == 0?"}
     CHECK_ZERO -- "Yes" --> ZERO["Zero (±0)"]

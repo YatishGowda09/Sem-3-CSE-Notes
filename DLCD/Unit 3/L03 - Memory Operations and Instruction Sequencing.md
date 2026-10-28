@@ -22,7 +22,7 @@ The transfer involves four hardware interfaces:
 ```mermaid
 flowchart LR
     CPU["CPU"] -- "MAR (Address Bus)" --> MEM["Main Memory"]
-    CPU <== "MDR (Data Bus)" ==> MEM
+    CPU <-->|"MDR (Data Bus)"| MEM
     CPU -- "Control: Read / Write" --> MEM
     MEM -- "Control: MFC (Handshake)" --> CPU
 ```

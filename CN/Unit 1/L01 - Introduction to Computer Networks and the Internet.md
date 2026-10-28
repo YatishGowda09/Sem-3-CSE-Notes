@@ -173,7 +173,7 @@ sequenceDiagram
     Client->>Server: TCP SYN (Connection Request)
     Server-->>Client: TCP SYN-ACK (Connection Granted)
     Client->>Server: TCP ACK + HTTP GET /index.html (Data Request)
-    Server-->>Client: HTTP 200 OK + <HTML File> (Data Response)
+    Server-->>Client: HTTP 200 OK + &lt;HTML File&gt; (Data Response)
     end
 ```
 

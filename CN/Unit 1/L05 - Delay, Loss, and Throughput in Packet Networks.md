@@ -195,7 +195,7 @@ flowchart TD
         direction TB
         I_LOW["I ≈ 0: Bits arrive far slower than link speed.<br/>Average Queueing Delay ≈ 0"]
         I_MID["I approaches 1: Bursts arrive faster than link can drain.<br/>Average Queueing Delay explodes exponentially!"]
-        I_HIGH["I > 1: Arrival rate strictly exceeds transmission rate.<br/>Queue grows to infinity -> Buffer Overflow -> 100% Packet Loss!"]
+        I_HIGH["I &gt; 1: Arrival rate strictly exceeds transmission rate.<br/>Queue grows to infinity -> Buffer Overflow -> 100% Packet Loss!"]
         I_LOW --> I_MID --> I_HIGH
     end
 ```

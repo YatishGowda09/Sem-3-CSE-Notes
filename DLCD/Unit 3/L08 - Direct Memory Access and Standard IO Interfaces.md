@@ -48,10 +48,10 @@ flowchart TD
 
     BUS["System Bus (Address, Data, Control)"]
 
-    CPU <===> BUS
-    DMAC <===> BUS
-    RAM <===> BUS
-    DEV <===> BUS
+    CPU <--> BUS
+    DMAC <--> BUS
+    RAM <--> BUS
+    DEV <--> BUS
 
     DEV -. "DMA Transfer Path (CPU Bypassed!)" .-> RAM
 ```
@@ -82,9 +82,9 @@ flowchart LR
         CR["Status & Control Register"]
     end
 
-    SYS_BUS["System Bus"] <===> MAR
-    SYS_BUS <===> WCR
-    SYS_BUS <===> CR
+    SYS_BUS["System Bus"] <--> MAR
+    SYS_BUS <--> WCR
+    SYS_BUS <--> CR
 
     MAR -- "Generates RAM Addresses" --> SYS_BUS
     WCR -- "Zero Detector" --> IRQ_GEN["Interrupt Generator"]

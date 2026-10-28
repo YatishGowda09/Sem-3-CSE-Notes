@@ -191,7 +191,7 @@ When $\alpha > \alpha_{\max}$:
 
 ```mermaid
 flowchart TD
-    Check{"Load Factor alpha > threshold?"} -- Yes --> Alloc["Allocate new bucket array: m_new = next_prime(2 * m_old)"]
+    Check{"Load Factor alpha &gt; threshold?"} -- Yes --> Alloc["Allocate new bucket array: m_new = next_prime(2 * m_old)"]
     Alloc --> Migrate["Rehash each element: i_new = h(key) % m_new"]
     Migrate --> FreeOld["Free old bucket array"]
     FreeOld --> Ready["Resume normal operations with alpha ~ 0.5"]

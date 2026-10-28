@@ -229,9 +229,9 @@ How should we implement a Priority Queue? There is a classic trade-off between i
 flowchart TD
     subgraph Strategies["Priority Queue Implementation Trade-Offs"]
         direction TB
-        S1["1. Unordered Array / Linked List\nInsert: O(1)\nDelete-Max: O(N) linear search"]
-        S2["2. Ordered Array / Linked List\nInsert: O(N) ordered positioning\nDelete-Max: O(1) instantaneous access"]
-        S3["3. Binary Heap (Unit 3)\nInsert: O(log N)\nDelete-Max: O(log N) optimal compromise"]
+        S1["1. Unordered Array / Linked List<br/>Insert: O(1)<br/>Delete-Max: O(N) linear search"]
+        S2["2. Ordered Array / Linked List<br/>Insert: O(N) ordered positioning<br/>Delete-Max: O(1) instantaneous access"]
+        S3["3. Binary Heap (Unit 3)<br/>Insert: O(log N)<br/>Delete-Max: O(log N) optimal compromise"]
     end
 ```
 

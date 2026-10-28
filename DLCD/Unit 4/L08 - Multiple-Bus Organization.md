@@ -47,12 +47,12 @@ flowchart TD
         PC --> BUSA
 
         BUSB --> MAR
-        BUSC <==> MDR
+        BUSC <--> MDR
         BUSA --> IR
     end
 
     MAR -- "Address Lines" --> EXT_MEM["External Memory System"]
-    EXT_MEM <== "Data Lines" ==> MDR
+    EXT_MEM <-->|"Data Lines"| MDR
 ```
 
 Look at the connectivity of the three buses:

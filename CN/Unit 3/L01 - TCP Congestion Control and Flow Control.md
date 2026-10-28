@@ -53,12 +53,11 @@ Let:
 Because the two senders share the link capacity $R$ equally, each sender's maximum achievable throughput is $\frac{R}{2}$.
 
 ```mermaid
-xychart-beta
-    title "Throughput and Delay as λ_in Approaches Capacity (Scenario 1)"
-    x-axis ["0.1 R/2", "0.3 R/2", "0.5 R/2", "0.8 R/2", "0.95 R/2", "R/2"]
-    y-axis "Delay (Seconds)" 0 --> 100
-    line [1, 2, 4, 12, 45, 100]
-```
+flowchart LR
+    subgraph DELAY["Queueing Delay Explosion as λ_in Approaches Capacity R/2"]
+        direction LR
+        D1["λ_in = 0.1 R/2<br/>Delay: 1s (Negligible)"] --> D2["λ_in = 0.5 R/2<br/>Delay: 4s (Linear)"] --> D3["λ_in = 0.8 R/2<br/>Delay: 12s (Steep)"] --> D4["λ_in = 0.95 R/2<br/>Delay: 45s (Severe)"] --> D5["λ_in = R/2 (Capacity)<br/>Delay &rarr; &infin; (Buffer Overflow / Loss)"]
+    end```
 
 Look at what happens as $\lambda_{\text{in}}$ approaches $\frac{R}{2}$:
 - As the arrival rate nears link capacity, packets must wait behind increasingly massive queues.
@@ -168,12 +167,24 @@ This strategy is known as **Additive Increase, Multiplicative Decrease (AIMD)**:
 - **Multiplicative Decrease**: The moment a loss event occurs, the sender cuts its `cwnd` in half (drastically backing off to relieve router queues).
 
 ```mermaid
-xychart-beta
-    title "TCP AIMD Sawtooth Waveform"
-    x-axis ["0s", "1s", "2s", "3s", "4s (Loss)", "5s", "6s", "7s (Loss)", "8s", "9s"]
-    y-axis "Congestion Window (cwnd in MSS)" 0 --> 30
-    line [10, 14, 18, 22, 11, 15, 19, 10, 14, 18]
-```
+flowchart LR
+    subgraph CYCLE1["Probe Cycle 1: Additive Increase (+1 MSS / RTT)"]
+        direction LR
+        W1["10 MSS"] --> W2["14 MSS"] --> W3["18 MSS"] --> W4["22 MSS<br/>(Loss Detected!)"]
+    end
+    subgraph MULT_DEC1["Multiplicative Decrease (/ 2)"]
+        direction TB
+        W4 -.->|Cut cwnd in half| W5["11 MSS"]
+    end
+    subgraph CYCLE2["Probe Cycle 2: Additive Increase (+1 MSS / RTT)"]
+        direction LR
+        W5 --> W6["15 MSS"] --> W7["19 MSS<br/>(Loss Detected!)"]
+    end
+    subgraph MULT_DEC2["Multiplicative Decrease (/ 2)"]
+        direction TB
+        W7 -.->|Cut cwnd in half| W8["10 MSS"]
+    end
+    CYCLE1 --> MULT_DEC1 --> CYCLE2 --> MULT_DEC2```
 
 AIMD generates the iconic **sawtooth pattern** of TCP traffic. Mathematically, AIMD has been proven to drive competing network flows toward both **optimal efficiency** and **fair bandwidth sharing**.
 
@@ -191,7 +202,7 @@ stateDiagram-v2
     state "3. Fast Recovery (FR)" as FR
 
     [*] --> SS: Connection opens (cwnd = 1 MSS)
-    SS --> CA: cwnd >= ssthresh (Linear transition)
+    SS --> CA: cwnd &ge; ssthresh (Linear transition)
     SS --> SS: Timeout (ssthresh = cwnd/2, cwnd = 1 MSS)
     
     CA --> CA: Each RTT without loss (cwnd += 1 MSS)

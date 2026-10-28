@@ -17,14 +17,14 @@ To understand MLE, we must master the distinction between probability and likeli
 ```mermaid
 flowchart LR
     subgraph ProbWorld ["Probability Perspective: P(X = x | θ)"]
-        FixedTheta["Parameter θ is FIXED and KNOWN\nData x is the VARIABLE"]
-        FuncX["Function of x: f_θ(x)\nIntegrates/sums to 1 over data space"]
+        FixedTheta["Parameter θ is FIXED and KNOWN<br/>Data x is the VARIABLE"]
+        FuncX["Function of x: f_θ(x)<br/>Integrates/sums to 1 over data space"]
         FixedTheta --> FuncX
     end
 
     subgraph LikeWorld ["Likelihood Perspective: L(θ | x)"]
-        FixedData["Data x is FIXED and OBSERVED\nParameter θ is the VARIABLE"]
-        FuncTheta["Function of θ: L(θ | x)\nDoes NOT integrate to 1 over parameter space"]
+        FixedData["Data x is FIXED and OBSERVED<br/>Parameter θ is the VARIABLE"]
+        FuncTheta["Function of θ: L(θ | x)<br/>Does NOT integrate to 1 over parameter space"]
         FixedData --> FuncTheta
     end
 ```
@@ -79,7 +79,7 @@ flowchart TD
     Likelihood["Likelihood Function: L(θ) = Π f(xᵢ; θ)"]
     LogLike["Log-Likelihood: ℓ(θ) = Σ ln f(xᵢ; θ)"]
     Score["Score Function: S(θ) = ∂ℓ/∂θ = 0"]
-    Hessian["Second Derivative: ∂²ℓ/∂θ² < 0 (Concavity Check)"]
+    Hessian["Second Derivative: ∂²ℓ/∂θ² &lt; 0 (Concavity Check)"]
     Solution["MLE Point Estimator: θ̂_MLE"]
 
     Data --> JointPDF --> Likelihood --> LogLike --> Score --> Hessian --> Solution

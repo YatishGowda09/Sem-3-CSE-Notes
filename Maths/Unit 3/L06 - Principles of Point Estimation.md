@@ -17,11 +17,11 @@ First, let's establish precise mathematical terminology:
 ```mermaid
 flowchart LR
     subgraph MathRule ["The Estimator (Random Variable)"]
-        Rule["θ̂ = g(X₁, X₂, ..., Xₙ)\n• Mathematical function / algorithm\n• Defined on the sample space\n• Possesses a sampling distribution"]
+        Rule["θ̂ = g(X₁, X₂, ..., Xₙ)<br/>• Mathematical function / algorithm<br/>• Defined on the sample space<br/>• Possesses a sampling distribution"]
     end
 
     subgraph NumberRealized ["The Realized Estimate (Number)"]
-        Val["θ̂_realized = g(x₁, x₂, ..., xₙ)\n• Concrete scalar value (e.g., 42.7)\n• Calculated from collected data\n• Has NO distribution"]
+        Val["θ̂_realized = g(x₁, x₂, ..., xₙ)<br/>• Concrete scalar value (e.g., 42.7)<br/>• Calculated from collected data<br/>• Has NO distribution"]
     end
 
     Rule -- "Evaluate on collected sample (x₁, ..., xₙ)" --> Val
@@ -44,10 +44,10 @@ To evaluate the mathematical quality of an estimator $\hat{\theta}$, statisticia
 ```mermaid
 flowchart TD
     Est["Estimator Quality Framework"]
-    Unbias["1. Unbiasedness\nE[θ̂] = θ\nNo systematic error"]
-    Eff["2. Efficiency\nVar(θ̂₁) < Var(θ̂₂)\nTightest possible spread"]
-    Cons["3. Consistency\nθ̂ₙ → θ in probability\nReaches exact truth as n → ∞"]
-    MSE["4. Minimum MSE\nMSE = Var(θ̂) + [Bias(θ̂)]²\nOptimal balance"]
+    Unbias["1. Unbiasedness<br/>E[θ̂] = θ<br/>No systematic error"]
+    Eff["2. Efficiency<br/>Var(θ̂₁) &lt; Var(θ̂₂)<br/>Tightest possible spread"]
+    Cons["3. Consistency<br/>θ̂ₙ → θ in probability<br/>Reaches exact truth as n → ∞"]
+    MSE["4. Minimum MSE<br/>MSE = Var(θ̂) + [Bias(θ̂)]²<br/>Optimal balance"]
 
     Est --> Unbias
     Est --> Eff
@@ -262,8 +262,8 @@ $$\text{MSE}(\hat{\theta}) = \text{Var}(\hat{\theta}) + \left[\text{Bias}(\hat{\
 ```mermaid
 flowchart TD
     MSE["Total Mean Squared Error: MSE(θ̂)"]
-    VarPart["Variance: Var(θ̂)\nSensitivity to specific sample noise;\nDispersion around estimator mean"]
-    BiasPart["Squared Bias: [Bias(θ̂)]²\nSystematic deviation of estimator\nmean from true parameter θ"]
+    VarPart["Variance: Var(θ̂)<br/>Sensitivity to specific sample noise;<br/>Dispersion around estimator mean"]
+    BiasPart["Squared Bias: [Bias(θ̂)]²<br/>Systematic deviation of estimator<br/>mean from true parameter θ"]
 
     MSE --> VarPart
     MSE --> BiasPart

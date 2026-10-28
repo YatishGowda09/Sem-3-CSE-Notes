@@ -36,7 +36,7 @@ For most non-pathological continuous distributions, the convergence is remarkabl
 
 ```mermaid
 flowchart TD
-    Pop["Arbitrary Population Distribution (Mean mu, Variance sigma^2)"] --> Sample["Draw Random Sample of Size n >= 30"]
+    Pop["Arbitrary Population Distribution (Mean mu, Variance sigma^2)"] --> Sample["Draw Random Sample of Size n &ge; 30"]
     Sample --> CLT["Central Limit Theorem Kick-in"]
     CLT --> NormDist["Sampling Distribution of X_bar ~ N(mu, sigma^2 / n)"]
     NormDist --> KnownSigma{"Is Population Variance sigma Known?"}
@@ -275,10 +275,10 @@ $$H_0: \mu_1 - \mu_2 = \Delta_0 \quad (\text{most often } \Delta_0 = 0)$$
 ```mermaid
 flowchart LR
     subgraph Pop1["Population 1 (Treatment A)"]
-        N1["Sample 1: n1 >= 30, Mean X_bar_1, Var s1^2"]
+        N1["Sample 1: n1 &ge; 30, Mean X_bar_1, Var s1^2"]
     end
     subgraph Pop2["Population 2 (Treatment B)"]
-        N2["Sample 2: n2 >= 30, Mean X_bar_2, Var s2^2"]
+        N2["Sample 2: n2 &ge; 30, Mean X_bar_2, Var s2^2"]
     end
     N1 --> Diff["Difference of Means: X_bar_1 - X_bar_2"]
     N2 --> Diff

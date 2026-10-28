@@ -109,11 +109,11 @@ Combining the Rouché–Capelli theorem with the count of free variables ($n - r
 ```mermaid
 flowchart TD
     Start["System A*x = b with m equations, n unknowns"] --> CheckRank{"Compare rank(A) vs rank([A | b])"}
-    CheckRank -- "rank(A) < rank([A | b])" --> Inconsistent["Inconsistent System: No Solution (0 solutions)"]
+    CheckRank -- "rank(A) &lt; rank([A | b])" --> Inconsistent["Inconsistent System: No Solution (0 solutions)"]
     CheckRank -- "rank(A) == rank([A | b]) = r" --> Consistent["Consistent System: At least 1 solution"]
     Consistent --> CheckFree{"Compare rank r with unknowns n"}
     CheckFree -- "r == n (Zero free variables)" --> Unique["Unique Solution (Exactly 1 solution)"]
-    CheckFree -- "r < n (n - r > 0 free variables)" --> Infinite["Infinitely Many Solutions (Parametric family)"]
+    CheckFree -- "r &lt; n (n - r &gt; 0 free variables)" --> Infinite["Infinitely Many Solutions (Parametric family)"]
 ```
 
 Let's summarize this in a clean reference table:

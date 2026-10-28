@@ -66,8 +66,8 @@ The **Hypertext Transfer Protocol (HTTP)** is the Web's application-layer protoc
 
 ```mermaid
 flowchart LR
-    BROWSER["Web Browser (Client)"] <==|"HTTP Request (e.g., GET /index.html)"|==> SERVER["Web Server (Apache / Nginx)"]
-    SERVER <==|"HTTP Response (e.g., 200 OK + HTML File)"|==> BROWSER
+    BROWSER["Web Browser (Client)"] <-->|"HTTP Request (e.g., GET /index.html)"| SERVER["Web Server (Apache / Nginx)"]
+    SERVER <-->|"HTTP Response (e.g., 200 OK + HTML File)"| BROWSER
 ```
 
 ### HTTP Transport: The TCP Connection
@@ -207,11 +207,11 @@ HTTP messages are not encoded in opaque binary; they are formatted in clean, hum
 ```mermaid
 flowchart TD
     subgraph REQ["HTTP Request Message Structure"]
-        RL["1. Request Line: <Method> <URL-Path> <Version>\r\n"]
-        HL1["2. Header Line: Host: www.someschool.edu\r\n"]
-        HL2["3. Header Line: User-Agent: Mozilla/5.0\r\n"]
-        HL3["4. Header Line: Connection: keep-alive\r\n"]
-        BL["5. Blank Line: \r\n (CRLF - Marks end of headers)"]
+        RL["1. Request Line: &lt;Method&gt; &lt;URL-Path&gt; &lt;Version&gt; [CRLF]"]
+        HL1["2. Header Line: Host: www.someschool.edu [CRLF]"]
+        HL2["3. Header Line: User-Agent: Mozilla/5.0 [CRLF]"]
+        HL3["4. Header Line: Connection: keep-alive [CRLF]"]
+        BL["5. Blank Line:  [CRLF] (CRLF - Marks end of headers)"]
         EB["6. Entity Body: (Optional POST/PUT form data / JSON)"]
         RL --> HL1 --> HL2 --> HL3 --> BL --> EB
     end
@@ -262,13 +262,13 @@ When the server processes a request, it returns an **HTTP Response Message**:
 ```mermaid
 flowchart TD
     subgraph RESP["HTTP Response Message Structure"]
-        SL["1. Status Line: <Version> <Status-Code> <Phrase>\r\n"]
-        HL1["2. Header Line: Date: Sun, 25 Oct 2026 12:00:00 GMT\r\n"]
-        HL2["3. Header Line: Server: Apache/2.4.52\r\n"]
-        HL3["4. Header Line: Content-Type: text/html\r\n"]
-        HL4["5. Header Line: Content-Length: 6821\r\n"]
-        BL["6. Blank Line: \r\n (CRLF)"]
-        EB["7. Entity Body: <!DOCTYPE html><html>... (Raw Object Data)"]
+        SL["1. Status Line: &lt;Version&gt; &lt;Status-Code&gt; &lt;Phrase&gt; [CRLF]"]
+        HL1["2. Header Line: Date: Sun, 25 Oct 2026 12:00:00 GMT [CRLF]"]
+        HL2["3. Header Line: Server: Apache/2.4.52 [CRLF]"]
+        HL3["4. Header Line: Content-Type: text/html [CRLF]"]
+        HL4["5. Header Line: Content-Length: 6821 [CRLF]"]
+        BL["6. Blank Line:  [CRLF] (CRLF)"]
+        EB["7. Entity Body: &lt;!DOCTYPE html&gt;&lt;html&gt;... (Raw Object Data)"]
         SL --> HL1 --> HL2 --> HL3 --> HL4 --> BL --> EB
     end
 ```

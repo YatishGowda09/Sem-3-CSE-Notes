@@ -51,11 +51,11 @@ Not all binary trees have the same structural properties. Depending on how nodes
 flowchart TD
     subgraph Classifications["Binary Tree Classifications"]
         direction TB
-        C1["1. Full / Strict / Proper Binary Tree\nEvery node has 0 or 2 children"]
-        C2["2. Complete Binary Tree\nAll levels filled; last level filled left-to-right"]
-        C3["3. Perfect Binary Tree\nAll internal nodes have 2 children; all leaves at same level"]
-        C4["4. Balanced Binary Tree\nHeight difference between subtrees <= 1"]
-        C5["5. Degenerate / Skewed Binary Tree\nEvery internal node has only 1 child (linear list)"]
+        C1["1. Full / Strict / Proper Binary Tree<br/>Every node has 0 or 2 children"]
+        C2["2. Complete Binary Tree<br/>All levels filled; last level filled left-to-right"]
+        C3["3. Perfect Binary Tree<br/>All internal nodes have 2 children; all leaves at same level"]
+        C4["4. Balanced Binary Tree<br/>Height difference between subtrees &le; 1"]
+        C5["5. Degenerate / Skewed Binary Tree<br/>Every internal node has only 1 child (linear list)"]
     end
 ```
 

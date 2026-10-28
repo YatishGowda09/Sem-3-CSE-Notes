@@ -26,11 +26,11 @@ flowchart TD
     subgraph RoundRobin["Round Robin Scheduling Cycle"]
         direction TB
         RQ["Ready Queue (FIFO)"]
-        CPU["CPU Core\n(Executes for Time Quantum 'q')"]
+        CPU["CPU Core<br/>(Executes for Time Quantum 'q')"]
 
         RQ -->|"1. Dequeue next process"| CPU
-        CPU -->|"2a. If Burst <= q: Process Terminates"| DONE["Terminated"]
-        CPU -.->|"2b. If Burst > q: Preempt & Enqueue to Rear"| RQ
+        CPU -->|"2a. If Burst &le; q: Process Terminates"| DONE["Terminated"]
+        CPU -.->|"2b. If Burst &gt; q: Preempt & Enqueue to Rear"| RQ
     end
 ```
 

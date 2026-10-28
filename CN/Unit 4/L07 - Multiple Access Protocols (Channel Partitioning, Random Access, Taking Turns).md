@@ -214,7 +214,7 @@ sequenceDiagram
     participant Node B (Position 1000m)
     Note over Node A: Time t0: Senses channel idle, starts transmitting Frame A
     Node A->>Channel: Signal propagates toward B...
-    Note over Node B: Time t1 (t1 < t0 + tprop): Senses channel idle! Frame A has not arrived yet.
+    Note over Node B: Time t1 (t1 &lt; t0 + tprop): Senses channel idle! Frame A has not arrived yet.
     Node B->>Channel: Starts transmitting Frame B
     Note over Channel: In the middle of the cable: Signals collide! Both frames corrupted.
 ```

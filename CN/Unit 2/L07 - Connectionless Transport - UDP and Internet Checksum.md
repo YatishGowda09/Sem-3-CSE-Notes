@@ -116,7 +116,7 @@ In **1's complement addition**, the carry bit is never discarded. When an additi
 flowchart TD
     Start["Input: UDP Header + Payload + IP Pseudo-Header"] --> Step1["1. Slices data into 16-bit binary words<br/>(If odd length, pad with 1 trailing zero byte)"]
     Step1 --> Step2["2. Sums all 16-bit words using standard addition"]
-    Step2 --> Step3{"Sum > 0xFFFF?<br/>(Carry bit generated?)"}
+    Step2 --> Step3{"Sum &gt; 0xFFFF?<br/>(Carry bit generated?)"}
     Step3 -- Yes --> Step4["End-Around Carry:<br/>Add overflow bits back into LSB"]
     Step4 --> Step3
     Step3 -- No --> Step5["3. Bitwise Inversion (1's Complement):<br/>Flip all 0s to 1s, and all 1s to 0s"]

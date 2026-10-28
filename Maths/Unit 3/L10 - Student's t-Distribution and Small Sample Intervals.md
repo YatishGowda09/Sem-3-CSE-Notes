@@ -38,11 +38,11 @@ $S$ is a random variable. If you draw a different random sample tomorrow, your s
 ```mermaid
 flowchart TD
     subgraph LargeSampleCase ["Large Sample: n ≥ 30"]
-        LS["S converges to σ by Law of Large Numbers\nRandomness in denominator vanishes\nRatio acts like pure Gaussian (Z)"]
+        LS["S converges to σ by Law of Large Numbers<br/>Randomness in denominator vanishes<br/>Ratio acts like pure Gaussian (Z)"]
     end
 
-    subgraph SmallSampleCase ["Small Sample: n < 30"]
-        SS["S has massive sample-to-sample fluctuation\nRandom Variable divided by another Random Variable\nTails become HEAVY due to denominator bouncing near zero"]
+    subgraph SmallSampleCase ["Small Sample: n &lt; 30"]
+        SS["S has massive sample-to-sample fluctuation<br/>Random Variable divided by another Random Variable<br/>Tails become HEAVY due to denominator bouncing near zero"]
     end
 ```
 
@@ -120,7 +120,7 @@ flowchart TD
     subgraph ShapeProperties ["Geometric Properties of Student's t"]
         Symm["Symmetry: Perfectly symmetric bell curve centered at 0"]
         Tails["Heavy Tails: Density decays as a power law (1 + t²/ν), not exponential e^(-t²)"]
-        VarComp["Variance > 1: Var(T) = ν / (ν - 2) for ν > 2"]
+        VarComp["Variance &gt; 1: Var(T) = ν / (ν - 2) for ν &gt; 2"]
         Asymp["Asymptotic Convergence: As ν → ∞, t(ν) → N(0, 1)"]
 
         Symm --- Tails --- VarComp --- Asymp
@@ -210,9 +210,9 @@ Let's examine how each component directly dictates the width of our uncertainty 
 ```mermaid
 flowchart TD
     MOE["Margin of Error: E = t_{α/2, n-1} · (S / √n)"]
-    Factor1["1. Confidence Level (1 - α)\n↑ Confidence → ↑ t-critical value → WIDER interval"]
-    Factor2["2. Sample Size (n)\n↑ n → Shrinks 1/√n AND lowers t_{α/2, n-1} → NARROWER interval"]
-    Factor3["3. Sample Variability (S)\n↑ S (System Noise) → Directly scales E → WIDER interval"]
+    Factor1["1. Confidence Level (1 - α)<br/>↑ Confidence → ↑ t-critical value → WIDER interval"]
+    Factor2["2. Sample Size (n)<br/>↑ n → Shrinks 1/√n AND lowers t_{α/2, n-1} → NARROWER interval"]
+    Factor3["3. Sample Variability (S)<br/>↑ S (System Noise) → Directly scales E → WIDER interval"]
 
     MOE --> Factor1
     MOE --> Factor2
@@ -235,16 +235,16 @@ To determine which interval formula to apply in any practical situation, follow 
 flowchart TD
     Start["Estimate Population Mean μ"] --> SigmaCheck{"Is Population Variance σ² KNOWN?"}
 
-    SigmaCheck -- "YES (Rare)" --> NormCheckKnown{"Is population Normal\nOR sample size n ≥ 30?"}
-    NormCheckKnown -- "YES" --> ZKnown["Use Standard Normal Z-Interval:\nx̄ ± z_{α/2} (σ / √n)"]
+    SigmaCheck -- "YES (Rare)" --> NormCheckKnown{"Is population Normal<br/>OR sample size n ≥ 30?"}
+    NormCheckKnown -- "YES" --> ZKnown["Use Standard Normal Z-Interval:<br/>x̄ ± z_{α/2} (σ / √n)"]
     NormCheckKnown -- "NO" --> NonParam1["Use Non-Parametric / Bootstrap Methods"]
 
     SigmaCheck -- "NO (Standard Practice)" --> SizeCheck{"Is Sample Size n ≥ 30?"}
 
-    SizeCheck -- "YES (Large Sample)" --> ZLarge["Use Large-Sample Z-Interval with S:\nx̄ ± z_{α/2} (S / √n)\n(via CLT & Slutsky's Theorem)"]
-    SizeCheck -- "NO (Small Sample)" --> NormCheck{"Is the population approximately\nNORMALLY distributed?"}
+    SizeCheck -- "YES (Large Sample)" --> ZLarge["Use Large-Sample Z-Interval with S:<br/>x̄ ± z_{α/2} (S / √n)<br/>(via CLT & Slutsky's Theorem)"]
+    SizeCheck -- "NO (Small Sample)" --> NormCheck{"Is the population approximately<br/>NORMALLY distributed?"}
 
-    NormCheck -- "YES" --> TSmall["Use Student's t-Interval:\nx̄ ± t_{α/2, n-1} (S / √n)\n(df = n - 1)"]
+    NormCheck -- "YES" --> TSmall["Use Student's t-Interval:<br/>x̄ ± t_{α/2, n-1} (S / √n)<br/>(df = n - 1)"]
     NormCheck -- "NO" --> NonParam2["Use Non-Parametric / Bootstrap Resampling"]
 ```
 

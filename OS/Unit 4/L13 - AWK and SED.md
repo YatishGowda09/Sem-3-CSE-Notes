@@ -25,7 +25,7 @@ flowchart TD
         direction TB
         B["BEGIN Block (Runs once before reading any input)"]
         READ["Read next line from input stream"]
-        SPLIT["Split line into fields: $1, $2, ..., $NF ($0 = whole line)"]
+        SPLIT["Split line into fields: col_1, col_2, ..., col_NF (col_0 = whole line)"]
         MATCH{"Matches pattern?"}
         ACT["Execute Action Block { ... }"]
         MORE{"More lines?"}
@@ -278,7 +278,7 @@ Students frequently ask: *"Both tools process text. How do I know which one to c
 flowchart TD
     QUESTION{"What is the primary nature of the text task?"}
     SED_CHOICE["Choose SED<br/>• Whole-line replacements<br/>• Regex search and replace (s/foo/bar/g)<br/>• Deleting ranges of lines (2,5d)<br/>• Fast stream filtering in pipes"]
-    AWK_CHOICE["Choose AWK<br/>• Columnar / Tabular data (fields $1, $2)<br/>• Mathematical calculations (sums, averages)<br/>• Conditional logic on specific fields ($3 > 50)<br/>• Report formatting with BEGIN/END"]
+    AWK_CHOICE["Choose AWK<br/>• Columnar / Tabular data (fields col_1, col_2)<br/>• Mathematical calculations (sums, averages)<br/>• Conditional logic on specific fields (col_3 &gt; 50)<br/>• Report formatting with BEGIN/END"]
 
     QUESTION -->|"Line-based Editing"| SED_CHOICE
     QUESTION -->|"Field-based Extraction & Math"| AWK_CHOICE

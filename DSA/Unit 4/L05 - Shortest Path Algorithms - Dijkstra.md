@@ -73,7 +73,7 @@ Edsger Dijkstra introduced an elegant greedy strategy:
 flowchart TD
     Init["dist[s] = 0, all other dist = inf<br>Insert all vertices into Priority Queue"] --> ExtractMin["Extract vertex u with MIN dist[u] from PQ"]
     ExtractMin --> Finalize["Mark u as Finalized (Added to S)"]
-    Finalize --> Relax["For each neighbor v of u:<br>if dist[u] + w(u,v) < dist[v]<br>dist[v] = dist[u] + w(u,v), parent[v] = u"]
+    Finalize --> Relax["For each neighbor v of u:<br>if dist[u] + w(u,v) &lt; dist[v]<br>dist[v] = dist[u] + w(u,v), parent[v] = u"]
     Relax --> Empty{"Is PQ empty?"}
     Empty -- No --> ExtractMin
     Empty -- Yes --> Done["All Shortest Paths Finalized"]

@@ -199,9 +199,9 @@ int mkfifo(const char *path, mode_t mode);
 
 ```mermaid
 flowchart LR
-    P_UNRELATED_A["Unrelated Writer: echo 'data' > /tmp/my_fifo"] --> FS["/tmp/my_fifo (Filesystem Rendezvous Point)"]
+    P_UNRELATED_A["Unrelated Writer: echo 'data' &gt; /tmp/my_fifo"] --> FS["/tmp/my_fifo (Filesystem Rendezvous Point)"]
     FS --> KBUF[("Kernel Bounded Ring Buffer")]
-    KBUF --> P_UNRELATED_B["Unrelated Reader: cat < /tmp/my_fifo"]
+    KBUF --> P_UNRELATED_B["Unrelated Reader: cat &lt; /tmp/my_fifo"]
 ```
 
 ### Critical Properties of FIFOs:
@@ -291,11 +291,11 @@ A **semaphore** is a kernel-protected integer counter that can only be accessed 
 ```mermaid
 flowchart TD
     SEM["Semaphore Value S"]
-    WAIT["wait(S): Test if S > 0"]
+    WAIT["wait(S): Test if S &gt; 0"]
     SIGNAL["signal(S): Increment S++"]
 
-    WAIT -->|"S > 0"| DEC["Decrement S-- and Enter Critical Section"]
-    WAIT -->|"S <= 0"| SLEEP["Block Process & Put on Wait Queue"]
+    WAIT -->|"S &gt; 0"| DEC["Decrement S-- and Enter Critical Section"]
+    WAIT -->|"S &le; 0"| SLEEP["Block Process & Put on Wait Queue"]
 
     SIGNAL --> WAKE["Wake up blocked process from Wait Queue"]
 ```

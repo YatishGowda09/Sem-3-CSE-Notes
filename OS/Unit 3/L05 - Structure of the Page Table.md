@@ -30,11 +30,11 @@ flowchart TD
     CPU["CPU generates logical address: (p, d)"] --> TLB_LOOKUP{"Is page p in the TLB?"}
     
     TLB_LOOKUP -- "TLB Hit (Fast: ~1 clock cycle)" --> HIT["Get Frame f directly from TLB"]
-    HIT --> RAM_ACCESS["Access Physical Memory: (f, d)<br><b>Total: 1 RAM access</b>"]
+    HIT --> RAM_ACCESS["Access Physical Memory: (f, d)<br/>(Total: 1 RAM access)"]
     
     TLB_LOOKUP -- "TLB Miss" --> MISS["Read Page Table in RAM (1st RAM access)"]
     MISS --> LOAD_TLB["Load translation (p -> f) into TLB"]
-    LOAD_TLB --> DATA_ACCESS["Access Target Data in RAM (2nd RAM access)<br><b>Total: 2 RAM accesses</b>"]
+    LOAD_TLB --> DATA_ACCESS["Access Target Data in RAM (2nd RAM access)<br/>(Total: 2 RAM accesses)"]
 ```
 
 ### How the TLB Works

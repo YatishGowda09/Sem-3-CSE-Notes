@@ -24,9 +24,9 @@ In a doubly linked list, each node contains three distinct parts:
 ```mermaid
 flowchart LR
     subgraph DLL["Doubly Linked List Structure"]
-        NULL1["NULL"] ---|"prev"| N1["Node 1\n[prev | 10 | next]"]
-        N1 <===>|"next / prev"| N2["Node 2\n[prev | 20 | next]"]
-        N2 <===>|"next / prev"| N3["Node 3\n[prev | 30 | next]"]
+        NULL1["NULL"] ---|"prev"| N1["Node 1<br/>[prev | 10 | next]"]
+        N1 <-->|"next / prev"| N2["Node 2<br/>[prev | 20 | next]"]
+        N2 <-->|"next / prev"| N3["Node 3<br/>[prev | 30 | next]"]
         N3 ---|"next"| NULL2["NULL"]
     end
 ```
@@ -106,9 +106,9 @@ Suppose we have an existing list `[10 <=> 20 <=> 30]` and want to insert `5` as 
 flowchart TD
     subgraph InsertBeginning["Insertion at Beginning"]
         direction LR
-        NEW["newNode (5)\nprev: NULL\nnext: Node 10"]
-        H["head (10)"] <===> N20["Node 20"] <===> N30["Node 30"]
-        NEW ===>|"newNode->next = head"| H
+        NEW["newNode (5)<br/>prev: NULL<br/>next: Node 10"]
+        H["head (10)"] <--> N20["Node 20"] <--> N30["Node 30"]
+        NEW ==>|"newNode->next = head"| H
         H -.->|"head->prev = newNode"| NEW
     end
 ```
@@ -302,10 +302,10 @@ flowchart TD
         D["del (Node to remove)"]
         N["del->next"]
 
-        P <===> D
-        D <===> N
+        P <--> D
+        D <--> N
 
-        P ===>|"del->prev->next = del->next"| N
+        P ==>|"del->prev->next = del->next"| N
         N -.->|"del->next->prev = del->prev"| P
     end
 ```
@@ -462,8 +462,8 @@ Yes: in a **Circular Doubly Linked List (CDLL)**:
 ```mermaid
 flowchart LR
     subgraph CDLL["Circular Doubly Linked List"]
-        N1["Node 1 (Head)"] <===> N2["Node 2"]
-        N2 <===> N3["Node 3 (Tail)"]
+        N1["Node 1 (Head)"] <--> N2["Node 2"]
+        N2 <--> N3["Node 3 (Tail)"]
         N3 -.->|"next points to head"| N1
         N1 -.->|"prev points to tail"| N3
     end

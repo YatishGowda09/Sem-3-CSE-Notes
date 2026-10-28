@@ -64,8 +64,8 @@ flowchart TD
     CheckNull -- Yes --> NotFound["Return NULL (Key Not Found)"]
     CheckNull -- No --> Compare{"Key == Target?"}
     Compare -- Equal --> Found["Return Current (Found)"]
-    Compare -- Target < Key --> BranchLeft["Current = Current->left"]
-    Compare -- Target > Key --> BranchRight["Current = Current->right"]
+    Compare -- "Target &lt; Key" --> BranchLeft["Current = Current->left"]
+    Compare -- "Target &gt; Key" --> BranchRight["Current = Current->right"]
     BranchLeft --> CheckNull
     BranchRight --> CheckNull
 ```

@@ -96,10 +96,10 @@ Yes, but instead of a two-sided confidence interval bounded on both sides, a one
 
 ```mermaid
 flowchart TD
-    Direction["One-Tailed Hypothesis Test"] --> LeftTest["Left-Tailed Test: H1: mu < mu0"]
-    Direction --> RightTest["Right-Tailed Test: H1: mu > mu0"]
-    LeftTest --> UpperBound["Upper Confidence Bound: mu <= X_bar + z_alpha * SE"]
-    RightTest --> LowerBound["Lower Confidence Bound: mu >= X_bar - z_alpha * SE"]
+    Direction["One-Tailed Hypothesis Test"] --> LeftTest["Left-Tailed Test: H1: mu &lt; mu0"]
+    Direction --> RightTest["Right-Tailed Test: H1: mu &gt; mu0"]
+    LeftTest --> UpperBound["Upper Confidence Bound: mu &le; X_bar + z_alpha * SE"]
+    RightTest --> LowerBound["Lower Confidence Bound: mu &ge; X_bar - z_alpha * SE"]
 ```
 
 ### 1. Right-Tailed Test ($H_1: \mu > \mu_0$)

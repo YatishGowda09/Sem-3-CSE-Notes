@@ -87,10 +87,10 @@ When the CPU executes an instruction that references address $\langle s, d \rang
 
 ```mermaid
 flowchart TD
-    CPU["CPU emits logical address: <s, d>"] --> CHK1{"Is s < STLR?"}
+    CPU["CPU emits logical address: &lt;s, d&gt;"] --> CHK1{"Is s &lt; STLR?"}
     CHK1 -- "No" --> TRAP1["Trap: Illegal Segment Number"]
     CHK1 -- "Yes" --> FETCH["Lookup Segment Table Entry for s<br>(Base, Limit)"]
-    FETCH --> CHK2{"Is offset d < Limit?"}
+    FETCH --> CHK2{"Is offset d &lt; Limit?"}
     CHK2 -- "No" --> TRAP2["Trap: Addressing Error (Segfault)"]
     CHK2 -- "Yes" --> ADD((+))
     BASE["Segment Base Address"] --> ADD

@@ -37,11 +37,11 @@ When $n$ is large (say, $n = 500$), the Law of Large Numbers locks $S$ very tigh
 
 ```mermaid
 flowchart TD
-    LargeN["Large Sample (n >= 30)"] --> VarShrink["Var(S^2) = 2*sigma^4 / (n - 1) shrinks to near 0"]
+    LargeN["Large Sample (n &ge; 30)"] --> VarShrink["Var(S^2) = 2*sigma^4 / (n - 1) shrinks to near 0"]
     VarShrink --> StableDenom["Denominator s/sqrt(n) behaves like a constant"]
     StableDenom --> NormalBehavior["Ratio T behaves like standard normal Z"]
 
-    SmallN["Small Sample (n < 30)"] --> VarLarge["Var(S^2) is substantial: S fluctuates widely"]
+    SmallN["Small Sample (n &lt; 30)"] --> VarLarge["Var(S^2) is substantial: S fluctuates widely"]
     VarLarge --> RandomDenom["Denominator S/sqrt(n) is intensely random"]
     RandomDenom --> HeavyTails["Small S values inflate T, producing extreme outliers (Heavy Tails)"]
     HeavyTails --> StudentT["Ratio T follows Student's t-distribution"]
@@ -233,7 +233,7 @@ When comparing two independent groups with small sample sizes ($n_1, n_2 < 30$),
 
 ```mermaid
 flowchart TD
-    TwoSample["Small Sample Comparison of Two Means (n1, n2 < 30)"] --> VarCheck{"Can Equal Variances (sigma1^2 = sigma2^2) be Assumed?"}
+    TwoSample["Small Sample Comparison of Two Means (n1, n2 &lt; 30)"] --> VarCheck{"Can Equal Variances (sigma1^2 = sigma2^2) be Assumed?"}
     VarCheck -- Yes --> Pooled["Pooled Two-Sample t-Test"]
     Pooled --> PooledFormula["Sp^2 = [(n1-1)s1^2 + (n2-1)s2^2] / (n1+n2-2), df = n1 + n2 - 2"]
     VarCheck -- No --> Welch["Welch's Unpooled t-Test"]

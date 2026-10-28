@@ -25,7 +25,7 @@ flowchart TD
         ADDR_COL["Column Address Bits (k_col)"] --> COL_DEC["Column Decoder & MUX"]
         ARRAY -- "Bit Lines (Columns)" --> SENSE["Sense Amplifiers & Write Drivers"]
         SENSE <--> COL_DEC
-        COL_DEC <== "m Data Bits" ==> DATA_BUS["Data I/O Pins (D_in / D_out)"]
+        COL_DEC <-->|"m Data Bits"| DATA_BUS["Data I/O Pins (D_in / D_out)"]
     end
 
     CS["Chip Select (CS')"] --> CONTROL["Chip Control Logic"]
@@ -202,8 +202,8 @@ flowchart TD
     CONTROL["Control Lines (CS', WE')"] --> CHIP1
     CONTROL --> CHIP2
 
-    CHIP1 <== "Data Bits [7:4]" ==> BUS_HIGH["Data Bus D7..D4"]
-    CHIP2 <== "Data Bits [3:0]" ==> BUS_LOW["Data Bus D3..D0"]
+    CHIP1 <-->|"Data Bits [7:4]"| BUS_HIGH["Data Bus D7..D4"]
+    CHIP2 <-->|"Data Bits [3:0]"| BUS_LOW["Data Bus D3..D0"]
 ```
 
 When an address is placed on the bus, both chips activate simultaneously, each supplying 4 bits to form the complete 8-bit byte.
@@ -230,8 +230,8 @@ flowchart TD
     ADDR_LOW["Lower Address Lines (A9..A0)"] --> CHIP1
     ADDR_LOW --> CHIP2
 
-    CHIP1 <== "Data Lines D7..D0" ==> DATA_BUS["Shared Data Bus"]
-    CHIP2 <== "Data Lines D7..D0" ==> DATA_BUS
+    CHIP1 <-->|"Data Lines D7..D0"| DATA_BUS["Shared Data Bus"]
+    CHIP2 <-->|"Data Lines D7..D0"| DATA_BUS
 ```
 
 ---
@@ -244,12 +244,12 @@ Computer systems organize memory into a multi-tiered **Memory Hierarchy**:
 
 ```mermaid
 flowchart TD
-    REG["CPU Registers: < 1 ns | < 2 KB (Fastest, Smallest, Highest $/GB)"]
+    REG["CPU Registers: &lt; 1 ns | &lt; 2 KB (Fastest, Smallest, Highest Cost/GB)"]
     L1["L1 Cache (SRAM): ~1 ns | 64 - 128 KB"]
     L2["L2 Cache (SRAM): ~3 ns | 512 KB - 2 MB"]
     L3["L3 Cache (SRAM): ~10 ns | 16 - 64 MB"]
     DRAM["Main Memory (DDR SDRAM): ~50 - 80 ns | 16 - 128 GB"]
-    SSD["Secondary Storage (NVMe SSD): ~10 - 50 µs | 1 - 4 TB (Slowest, Largest, Lowest $/GB)"]
+    SSD["Secondary Storage (NVMe SSD): ~10 - 50 µs | 1 - 4 TB (Slowest, Largest, Lowest Cost/GB)"]
 
     REG --> L1 --> L2 --> L3 --> DRAM --> SSD
 ```

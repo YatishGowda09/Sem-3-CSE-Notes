@@ -23,7 +23,7 @@ An interval estimator uses the sample data $(X_1, \dots, X_n)$ to construct a lo
 flowchart LR
     subgraph IntervalAnatomy ["Anatomy of an Interval Estimate"]
         Left["Lower Limit: L = x̄ - E"]
-        Center["Point Estimate: x̄\n(Center of Mass)"]
+        Center["Point Estimate: x̄<br/>(Center of Mass)"]
         Right["Upper Limit: U = x̄ + E"]
 
         Left ---|"Margin of Error (E)"| Center
@@ -102,9 +102,9 @@ $$P\left(-z_{\alpha/2} \le Z \le z_{\alpha/2}\right) = 1 - \alpha$$
 ```mermaid
 flowchart TD
     subgraph NormalCriticalArea ["Standard Normal Area Partition"]
-        LeftTail["Left Tail Area: α / 2\n(-∞ to -z_{α/2})"]
-        CentralBody["Central Confidence Area: 1 - α\n(-z_{α/2} to +z_{α/2})"]
-        RightTail["Right Tail Area: α / 2\n(+z_{α/2} to +∞)"]
+        LeftTail["Left Tail Area: α / 2<br/>(-∞ to -z_{α/2})"]
+        CentralBody["Central Confidence Area: 1 - α<br/>(-z_{α/2} to +z_{α/2})"]
+        RightTail["Right Tail Area: α / 2<br/>(+z_{α/2} to +∞)"]
 
         LeftTail --- CentralBody --- RightTail
     end
@@ -183,9 +183,9 @@ Notice what controls the width of our uncertainty window:
 ```mermaid
 flowchart TD
     Width["Interval Width: W = 2 z_{α/2} (σ / √n)"]
-    Conf["Confidence Level (1 - α)\nHigher confidence → Larger z_{α/2} → WIDER interval"]
-    Var["Variability (σ or S)\nHigher noise → Larger σ → WIDER interval"]
-    Size["Sample Size (n)\nMore data → Larger n → NARROWER interval (by 1/√n)"]
+    Conf["Confidence Level (1 - α)<br/>Higher confidence → Larger z_{α/2} → WIDER interval"]
+    Var["Variability (σ or S)<br/>Higher noise → Larger σ → WIDER interval"]
+    Size["Sample Size (n)<br/>More data → Larger n → NARROWER interval (by 1/√n)"]
 
     Width --> Conf
     Width --> Var

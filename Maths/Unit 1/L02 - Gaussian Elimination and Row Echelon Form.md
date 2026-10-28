@@ -84,7 +84,7 @@ flowchart TD
     IsPivotZero -- Yes --> SwapRow["Swap with lower row where a_ik != 0"]
     IsPivotZero -- No --> ComputeMult["Compute multipliers m_ik = a_ik / a_kk"]
     SwapRow --> ComputeMult
-    ComputeMult --> Eliminate["Apply ERO: R_i <- R_i - m_ik * R_k for all i > k"]
+    ComputeMult --> Eliminate["Apply ERO: R_i <- R_i - m_ik * R_k for all i &gt; k"]
     Eliminate --> MoreCols{"More columns/rows remaining?"}
     MoreCols -- Yes --> NextCol["Advance to next row and column (Submatrix)"]
     NextCol --> FindPivot

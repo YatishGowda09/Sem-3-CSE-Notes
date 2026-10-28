@@ -279,10 +279,10 @@ Let's examine how the required sample size responds to changes in engineering re
 
 ```mermaid
 flowchart TD
-    Base["Baseline: Delta = $5, Power = 80%, alpha = 0.05 -> n = 566/group"]
+    Base["Baseline: Delta = 5 USD, Power = 80%, alpha = 0.05 &rarr; n = 566/group"]
     Base --> ChangeP["Increase Power to 90%: z_beta goes from 0.842 to 1.282"]
     ChangeP --> ResultP["n = 757/group (+33.7% data needed)"]
-    Base --> ChangeD["Halve Effect Size: Delta drops from $5 to $2.50"]
+    Base --> ChangeD["Halve Effect Size: Delta drops from 5 USD to 2.50 USD"]
     ChangeD --> ResultD["n = 2,261/group (4x data needed!)"]
 ```
 

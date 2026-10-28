@@ -39,13 +39,13 @@ flowchart LR
     PERIPHERAL["Peripheral Device (Keyboard, Sensor, Display)"]
 
     ABUS --> DEC
-    DBUS <===> DATA
-    DBUS <===> STATUS
-    DBUS <===> CONTROL
+    DBUS <--> DATA
+    DBUS <--> STATUS
+    DBUS <--> CONTROL
     CBUS <---> CONTROL_LOGIC
 
-    DATA <===> PERIPHERAL
-    CONTROL_LOGIC <===> PERIPHERAL
+    DATA <--> PERIPHERAL
+    CONTROL_LOGIC <--> PERIPHERAL
 ```
 
 ---

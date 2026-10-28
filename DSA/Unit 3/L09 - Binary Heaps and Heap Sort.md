@@ -136,7 +136,7 @@ When inserting a new value into a Max-Heap:
 
 ```mermaid
 flowchart TD
-    InsertLeaf["Place new element at array index n (next leaf)"] --> CheckParent{"Current > Parent?"}
+    InsertLeaf["Place new element at array index n (next leaf)"] --> CheckParent{"Current &gt; Parent?"}
     CheckParent -- Yes --> SwapUp["Swap Current with Parent<br>Current = Parent Index"]
     SwapUp --> CheckRoot{"Is Current at Root (index 0)?"}
     CheckRoot -- No --> CheckParent
@@ -311,7 +311,7 @@ flowchart TD
     Build --> LoopStart["Loop i from n-1 down to 1"]
     LoopStart --> SwapMax["Swap arr[0] with arr[i]<br>(Places current max at end of array)"]
     SwapMax --> FixHeap["heapify(arr, i, 0)<br>(Restores max-heap on remaining i elements)"]
-    FixHeap --> NextIter{"More elements (i > 0)?"}
+    FixHeap --> NextIter{"More elements (i &gt; 0)?"}
     NextIter -- Yes --> LoopStart
     NextIter -- No --> SortedArray["Sorted Array: [5, 6, 7, 11, 12, 13]"]
 ```

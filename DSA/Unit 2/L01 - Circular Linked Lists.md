@@ -22,9 +22,9 @@ A circular linked list is a sequence of nodes where each node contains data and 
 flowchart LR
     subgraph Ring["Circular Linked List Ring"]
         direction LR
-        N1["Node 1\nData: 10"] --> N2["Node 2\nData: 20"]
-        N2 --> N3["Node 3\nData: 30"]
-        N3 --> N4["Node 4\nData: 40"]
+        N1["Node 1<br/>Data: 10"] --> N2["Node 2<br/>Data: 20"]
+        N2 --> N3["Node 3<br/>Data: 30"]
+        N3 --> N4["Node 4<br/>Data: 40"]
         N4 -.->|"next points back to head"| N1
     end
 ```
@@ -160,7 +160,7 @@ When we insert the very first node:
 
 ```mermaid
 flowchart LR
-    L["last"] --> N["New Node\nData: 10"]
+    L["last"] --> N["New Node<br/>Data: 10"]
     N -.->|"next points to itself"| N
 ```
 

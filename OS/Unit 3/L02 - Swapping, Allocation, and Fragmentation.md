@@ -133,7 +133,7 @@ Look at how the hardware comparator and adder work together:
 
 ```mermaid
 flowchart TD
-    CPU["CPU emits Logical Address"] --> COMP{"Logical Address < Limit?"}
+    CPU["CPU emits Logical Address"] --> COMP{"Logical Address &lt; Limit?"}
     COMP -- "No" --> TRAP["Trap to OS (Addressing Error / Segfault)"]
     COMP -- "Yes" --> ADD((+))
     RELOC["Relocation Register (Base Address)"] --> ADD

@@ -228,8 +228,8 @@ flowchart TD
     subgraph EnqueueLinked["Linked Queue Enqueue"]
         direction LR
         OLD_R["rear"] --> N30["Node 30"]
-        NEW["newNode (40)\nnext = NULL"]
-        N30 ===>|"rear->next = newNode"| NEW
+        NEW["newNode (40)<br/>next = NULL"]
+        N30 ==>|"rear->next = newNode"| NEW
         R_NEW["rear (updated)"] --> NEW
     end
 ```

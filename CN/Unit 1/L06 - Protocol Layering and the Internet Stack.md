@@ -70,7 +70,7 @@ flowchart TD
         A2 --> R2 --> G2 --> B2 --> T2
     end
 
-    A1 ==|"Airplane in Transit"|==> A2
+    A1 ==>|"Airplane in Transit"| A2
 ```
 
 Notice the horizontal, peer-to-peer symmetry:
@@ -213,9 +213,9 @@ flowchart TD
         B_APP --- B_TRANS --- B_NET --- B_LINK --- B_PHYS
     end
 
-    A_PHYS <==> S_PHYS
-    S_PHYS <==> R_PHYS
-    R_PHYS <==> B_PHYS
+    A_PHYS <--> S_PHYS
+    S_PHYS <--> R_PHYS
+    R_PHYS <--> B_PHYS
 ```
 
 Look at where each network device lives in the stack:
@@ -266,11 +266,11 @@ sequenceDiagram
     participant Router as Layer-3 Router
     participant HostB as Host B
 
-    HostA->>Switch: Transmits Frame: [H_l(A->Switch) | H_n | H_t | M]
+    HostA->>Switch: Transmits Frame: "[H_l(A->Switch) | H_n | H_t | M]"
     Note over Switch: Switch decapsulates to Link Layer.<br/>Reads destination MAC.<br/>Forwards frame unchanged.
-    Switch->>Router: Transmits Frame: [H_l(A->Router) | H_n | H_t | M]
+    Switch->>Router: Transmits Frame: "[H_l(A->Router) | H_n | H_t | M]"
     Note over Router: Router strips Link Header H_l.<br/>Inspects Network Header H_n (IP).<br/>Queries forwarding table.<br/>Generates NEW Link Header H_l' (Router->B)!
-    Router->>HostB: Transmits New Frame: [H_l'(Router->B) | H_n | H_t | M]
+    Router->>HostB: Transmits New Frame: "[H_l'(Router->B) | H_n | H_t | M]"
     Note over HostB: Decapsulation up the stack:<br/>Strips H_l' -> Strips H_n -> Strips H_t<br/>Delivers pure Message M to Socket!
 ```
 

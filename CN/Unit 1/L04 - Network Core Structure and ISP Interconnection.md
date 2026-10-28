@@ -126,12 +126,12 @@ To save money, the two regional ISPs establish a **Peering Agreement**:
 flowchart TD
     subgraph EXPENSIVE["Option 1: Paid Transit through Tier-1"]
         direction TB
-        C1["ISP 1 (Chicago)"] -->|"$$ Paid Transit"| T1["Tier-1 Backbone"] -->|"$$ Paid Transit"| C2["ISP 2 (Detroit)"]
+        C1["ISP 1 (Chicago)"] -->|"Paid Transit Fee"| T1["Tier-1 Backbone"] -->|"Paid Transit Fee"| C2["ISP 2 (Detroit)"]
     end
 
     subgraph CHEAP["Option 2: Settlement-Free Peering"]
         direction TB
-        P1["ISP 1 (Chicago)"] <==|"Direct Peering Link (FREE)"|==> P2["ISP 2 (Detroit)"]
+        P1["ISP 1 (Chicago)"] <-->|"Direct Peering Link (FREE)"| P2["ISP 2 (Detroit)"]
     end
 ```
 

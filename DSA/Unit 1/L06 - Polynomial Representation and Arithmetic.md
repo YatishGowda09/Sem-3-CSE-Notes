@@ -142,8 +142,8 @@ flowchart TD
         direction TB
         cmp{"Compare p1->exp vs p2->exp"}
         c_eq["p1->exp == p2->exp<br>sum = p1->coeff + p2->coeff<br>If sum != 0, append(sum, exp)<br>p1 = p1->next; p2 = p2->next"]
-        c_gt["p1->exp > p2->exp<br>append(p1->coeff, p1->exp)<br>p1 = p1->next"]
-        c_lt["p2->exp > p1->exp<br>append(p2->coeff, p2->exp)<br>p2 = p2->next"]
+        c_gt["p1->exp &gt; p2->exp<br>append(p1->coeff, p1->exp)<br>p1 = p1->next"]
+        c_lt["p2->exp &gt; p1->exp<br>append(p2->coeff, p2->exp)<br>p2 = p2->next"]
         
         cmp -->|"Equal"| c_eq
         cmp -->|"p1 greater"| c_gt
@@ -184,7 +184,7 @@ Term *add_polynomials(const Term *p1, const Term *p2) {
             append_term(sum, p1->exp);
             p1 = p1->next;
             p2 = p2->next;
-        } else if (p1->exp > p2->exp) {
+        } else if (p1->exp &gt; p2->exp) {
             append_term(p1->coeff, p1->exp);
             p1 = p1->next;
         } else {

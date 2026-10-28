@@ -73,8 +73,8 @@ The exact mathematical inequality chosen for $H_1$ dictates the directionality o
 ```mermaid
 flowchart TD
     TestChoice["Directionality of Alternative Hypothesis H1"] --> TwoTailed["Two-Tailed Test (H1: mu != mu0)"]
-    TestChoice --> LeftTailed["One-Tailed Left Test (H1: mu < mu0)"]
-    TestChoice --> RightTailed["One-Tailed Right Test (H1: mu > mu0)"]
+    TestChoice --> LeftTailed["One-Tailed Left Test (H1: mu &lt; mu0)"]
+    TestChoice --> RightTailed["One-Tailed Right Test (H1: mu &gt; mu0)"]
     TwoTailed --> SplitAlpha["Alpha split equally across both tails: alpha/2 each"]
     LeftTailed --> LeftAlpha["Entire alpha concentrated in lower tail"]
     RightTailed --> RightAlpha["Entire alpha concentrated in upper tail"]

@@ -96,7 +96,7 @@ flowchart LR
         ISP_ROUTER["ISP Edge Router"]
     end
 
-    SPLIT <==|"Dedicated Local Loop (Copper)"|=> DSLAM
+    SPLIT <-->|"Dedicated Local Loop (Copper)"| DSLAM
     DSLAM --> TEL_NET
     DSLAM --> ISP_ROUTER
 ```
@@ -147,7 +147,7 @@ flowchart LR
         H3["Home 3 (Cable Modem)"]
     end
 
-    FIBER_TX ==|"Optical Fiber Trunk"|==> NODE
+    FIBER_TX ==>|"Optical Fiber Trunk"| NODE
     AMP1 --- H1
     AMP1 --- H2
     AMP1 --- H3
@@ -178,7 +178,7 @@ $$\text{Pure optical fiber running all the way from the central office into the 
 
 ```mermaid
 flowchart LR
-    CO["Central Office: OLT (Optical Line Terminal)"] ==|"Optical Fiber"|==> SPLIT["Passive Optical Splitter"]
+    CO["Central Office: OLT (Optical Line Terminal)"] ==>|"Optical Fiber"| SPLIT["Passive Optical Splitter"]
     SPLIT -->|"Fiber"| ONT1["Home 1: ONT (Optical Network Terminal)"]
     SPLIT -->|"Fiber"| ONT2["Home 2: ONT"]
     SPLIT -->|"Fiber"| ONT3["Home 3: ONT"]

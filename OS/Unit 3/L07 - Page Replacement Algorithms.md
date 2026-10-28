@@ -154,7 +154,7 @@ OPT looks forward in time to find the page used furthest in the future.
 
 ```mermaid
 flowchart LR
-    PAST["<-- Past References"] --- NOW["[ NOW ]"] --- FUTURE["Future References -->"]
+    PAST["&larr; Past References"] --- NOW["[ NOW ]"] --- FUTURE["Future References &rarr;"]
     PAST -.->|"LRU looks backward:<br>Evict page used furthest in past"| NOW
     NOW -.->|"OPT looks forward:<br>Evict page used furthest in future"| FUTURE
 ```

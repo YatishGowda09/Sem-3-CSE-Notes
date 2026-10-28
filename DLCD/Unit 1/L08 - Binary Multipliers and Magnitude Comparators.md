@@ -179,11 +179,11 @@ flowchart LR
 
     A --> AND1["AND Gate"]
     B --> NOT1["NOT"] --> AND1
-    AND1 --> GT["A > B"]
+    AND1 --> GT["A &gt; B"]
 
     A --> NOT2["NOT"] --> AND2["AND Gate"]
     B --> AND2
-    AND2 --> LT["A < B"]
+    AND2 --> LT["A &lt; B"]
 ```
 
 ---
@@ -269,8 +269,8 @@ flowchart TD
     Equivalence_Logic --> Output_Logic
 
     EQ_GATE --> OUT_EQ["A = B"]
-    GT_GATE --> OUT_GT["A > B"]
-    LT_GATE --> OUT_LT["A < B"]
+    GT_GATE --> OUT_GT["A &gt; B"]
+    LT_GATE --> OUT_LT["A &lt; B"]
 ```
 
 ---
@@ -299,8 +299,8 @@ For an 8-bit comparator using two 4-bit blocks:
 flowchart LR
     subgraph Stage0["Lower 4-Bit Comparator (Bits 3..0)"]
         TieEQ["I(A=B) = 1"] --> C0["7485 Stage 0"]
-        TieGT["I(A>B) = 0"] --> C0
-        TieLT["I(A<B) = 0"] --> C0
+        TieGT["I(A&gt;B) = 0"] --> C0
+        TieLT["I(A&lt;B) = 0"] --> C0
         A_low["A[3:0]"] --> C0
         B_low["B[3:0]"] --> C0
     end
@@ -310,17 +310,17 @@ flowchart LR
         B_high["B[7:4]"] --> C1
     end
 
-    C0 -- "A > B" --> C1_GT["I(A>B)"]
+    C0 -- "A &gt; B" --> C1_GT["I(A&gt;B)"]
     C0 -- "A = B" --> C1_EQ["I(A=B)"]
-    C0 -- "A < B" --> C1_LT["I(A<B)"]
+    C0 -- "A &lt; B" --> C1_LT["I(A&lt;B)"]
 
     C1_GT --> C1
     C1_EQ --> C1
     C1_LT --> C1
 
-    C1 --> F_GT["Final A > B"]
+    C1 --> F_GT["Final A &gt; B"]
     C1 --> F_EQ["Final A = B"]
-    C1 --> F_LT["Final A < B"]
+    C1 --> F_LT["Final A &lt; B"]
 ```
 
 Notice the critical orientation: the **most significant stage produces the final outputs**. If bits 7 through 4 differ, Stage 1 immediately decides the final result without waiting for Stage 0. If bits 7 through 4 are identical, Stage 1 defers to whatever decision was reached by Stage 0.

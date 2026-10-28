@@ -234,7 +234,7 @@ We use **Round-Robin (RR) Scheduling**:
 
 ```mermaid
 flowchart LR
-    READY["Circular Ready Queue: [ P1 ] -> [ P2 ] -> [ P3 ]"] -->|"Dispatched for <= 1 Time Quantum"| CPU["CPU Core"]
+    READY["Circular Ready Queue: [ P1 ] -> [ P2 ] -> [ P3 ]"] -->|"Dispatched for &le; 1 Time Quantum"| CPU["CPU Core"]
     CPU -->|"Quantum Expires (Timer Interrupt)"| READY
     CPU -->|"Process Finishes / Yields"| TERM["Exit / Waiting State"]
 ```

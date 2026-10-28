@@ -62,8 +62,8 @@ Random variables fall into two fundamental classes based on the nature of their 
 ```mermaid
 flowchart TD
     RV["Random Variable X: Ω → ℝ"]
-    Discrete["Discrete Random Variable\nRange is countable (finite or countably infinite)\nGoverned by Probability Mass Function (PMF)\nP(X = x)"]
-    Continuous["Continuous Random Variable\nRange is an uncountable continuum / interval\nGoverned by Probability Density Function (PDF)\nf(x) where P(X = x) = 0"]
+    Discrete["Discrete Random Variable<br/>Range is countable (finite or countably infinite)<br/>Governed by Probability Mass Function (PMF)<br/>P(X = x)"]
+    Continuous["Continuous Random Variable<br/>Range is an uncountable continuum / interval<br/>Governed by Probability Density Function (PDF)<br/>f(x) where P(X = x) = 0"]
 
     RV --> Discrete
     RV --> Continuous
@@ -277,10 +277,10 @@ Mean (first moment) and variance (second central moment) capture location and sp
 ```mermaid
 flowchart TD
     Moments["Hierarchy of Distributional Moments"]
-    M1["1st Moment: Mean μ\nLocation / Center of Mass"]
-    M2["2nd Central Moment: Variance σ²\nScale / Spread around Mean"]
-    M3["3rd Standardized Moment: Skewness γ₁\nAsymmetry (Left vs Right Tail)"]
-    M4["4th Standardized Moment: Kurtosis γ₂\nTail Heaviness / Outlier Proneness"]
+    M1["1st Moment: Mean μ<br/>Location / Center of Mass"]
+    M2["2nd Central Moment: Variance σ²<br/>Scale / Spread around Mean"]
+    M3["3rd Standardized Moment: Skewness γ₁<br/>Asymmetry (Left vs Right Tail)"]
+    M4["4th Standardized Moment: Kurtosis γ₂<br/>Tail Heaviness / Outlier Proneness"]
 
     Moments --> M1
     Moments --> M2

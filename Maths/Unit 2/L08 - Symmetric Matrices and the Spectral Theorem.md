@@ -159,8 +159,8 @@ This reveals that the signs of the eigenvalues completely dictate the curvature 
 
 ```mermaid
 flowchart TD
-    EIG["Eigenvalues of Symmetric Matrix A"] --> ALLPOS["All lambda_i > 0: Positive Definite (Strict Convex Minimum)"]
-    EIG --> NONNEG["All lambda_i >= 0: Positive Semi-Definite (Convex Valley)"]
+    EIG["Eigenvalues of Symmetric Matrix A"] --> ALLPOS["All lambda_i &gt; 0: Positive Definite (Strict Convex Minimum)"]
+    EIG --> NONNEG["All lambda_i &ge; 0: Positive Semi-Definite (Convex Valley)"]
     EIG --> MIXED["Mixed Signs: Indefinite (Saddle Point)"]
 ```
 

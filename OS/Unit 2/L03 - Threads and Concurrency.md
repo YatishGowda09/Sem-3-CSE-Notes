@@ -310,12 +310,11 @@ Even if you run this program on a supercomputer with **1,000,000 CPU cores**, it
 | **$\infty$** | **$3.33\times$ (Asymptote)** | **$0\%$** |
 
 ```mermaid
-xychart-beta
-    title "Speedup vs Cores under Amdahl's Law (S = 0.30)"
-    x-axis ["1 Core", "2 Cores", "4 Cores", "8 Cores", "16 Cores", "32 Cores", "64 Cores"]
-    y-axis "Speedup Factor" 0 --> 4
-    line [1.0, 1.54, 2.11, 2.58, 2.91, 3.10, 3.22]
-```
+flowchart LR
+    subgraph AMDAHL["Amdahl's Law Diminishing Returns (Serial Portion S = 30%)"]
+        direction LR
+        C1["1 Core: 1.0x (Baseline)"] --> C2["2 Cores: 1.54x"] --> C4["4 Cores: 2.11x"] --> C8["8 Cores: 2.58x"] --> C16["16 Cores: 2.91x"] --> C64["64 Cores: 3.22x<br/>(Asymptotic Ceiling = 1/0.30 = 3.33x)"]
+    end```
 
 ### The Engineering Takeaway:
 Notice how steeply the curve flattens. Going from 1 core to 2 cores gains $+0.54\times$ speedup. Going from 16 cores to 64 cores gains only $+0.31\times$ speedup!

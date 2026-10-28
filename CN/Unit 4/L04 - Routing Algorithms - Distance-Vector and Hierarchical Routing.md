@@ -216,7 +216,7 @@ flowchart TD
         BGP2["Gateway Router (BGP)"] --- R2A["Internal Router"]
     end
     
-    BGP1 <==>|"Inter-AS Routing (BGP - Policy Driven)"| BGP2
+    BGP1 <-->|"Inter-AS Routing (BGP - Policy Driven)"| BGP2
     
     subgraph InternalProtocols["Intra-AS Routing (IGP - Performance Driven)"]
         Note1["Runs OSPF or RIP inside the AS"]

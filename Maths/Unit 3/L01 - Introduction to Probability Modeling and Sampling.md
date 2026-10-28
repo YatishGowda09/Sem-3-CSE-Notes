@@ -23,15 +23,15 @@ In engineering and data science, statistics provides a scientific framework for 
 ```mermaid
 flowchart LR
     subgraph PopulationDomain ["Population (Unknown World)"]
-        Pop["Population\nParameters: μ, σ², p\n(Fixed, unobserved constants)"]
+        Pop["Population<br/>Parameters: μ, σ², p<br/>(Fixed, unobserved constants)"]
     end
 
     subgraph SampleDomain ["Sample (Observed Data)"]
-        Samp["Sample\nStatistics: x̄, s², p̂\n(Known, computed from data)"]
+        Samp["Sample<br/>Statistics: x̄, s², p̂<br/>(Known, computed from data)"]
     end
 
-    Pop -- "1. Sampling Process\n(Careful data collection)" --> Samp
-    Samp -- "2. Statistical Inference\n(Estimation & Hypothesis Testing)" --> Pop
+    Pop -- "1. Sampling Process<br/>(Careful data collection)" --> Samp
+    Samp -- "2. Statistical Inference<br/>(Estimation & Hypothesis Testing)" --> Pop
 ```
 
 ### Real-World Problems We Seek to Solve
@@ -82,8 +82,8 @@ One of the most important classifications in engineering statistics is the disti
 ```mermaid
 flowchart TD
     PopType["Populations in Engineering & Science"]
-    Tangible["Tangible (Concrete) Population\n• Members are physical objects\n• Always finite in size\n• Involves counting\n• Sampling reduces population size"]
-    Conceptual["Conceptual Population\n• Members are not physical objects\n• Result of repeated measurements\n• Inherently infinite or unbounded\n• All elements do not exist at once"]
+    Tangible["Tangible (Concrete) Population<br/>• Members are physical objects<br/>• Always finite in size<br/>• Involves counting<br/>• Sampling reduces population size"]
+    Conceptual["Conceptual Population<br/>• Members are not physical objects<br/>• Result of repeated measurements<br/>• Inherently infinite or unbounded<br/>• All elements do not exist at once"]
 
     PopType --> Tangible
     PopType --> Conceptual
@@ -143,10 +143,10 @@ In real-world data science, we rarely have access to the exact population we wan
 ```mermaid
 flowchart TD
     subgraph Hierarchy ["Population Access Hierarchy"]
-        Target["1. Target (Theoretical) Population\nEntire group to which we want to generalize conclusions"]
-        Study["2. Study (Accessible) Population\nSubset of the target population that is practically reachable"]
-        Frame["3. Sampling Frame\nOperational registry or list used to select respondents"]
-        Sample["4. Realized Sample\nThe specific units actually measured"]
+        Target["1. Target (Theoretical) Population<br/>Entire group to which we want to generalize conclusions"]
+        Study["2. Study (Accessible) Population<br/>Subset of the target population that is practically reachable"]
+        Frame["3. Sampling Frame<br/>Operational registry or list used to select respondents"]
+        Sample["4. Realized Sample<br/>The specific units actually measured"]
 
         Target --> Study --> Frame --> Sample
     end
@@ -202,12 +202,12 @@ Not every sample yields valid conclusions. To ensure reliable statistical infere
 ```mermaid
 flowchart TD
     Crit["Criteria of a Reliable Sample"]
-    Rep["1. Representative\nAccurately mirrors the demographic and technical traits of the population"]
-    Siz["2. Appropriately Sized\nLarge enough to guarantee statistical stability and low margin of error"]
-    Unb["3. Unbiased\nContains every subgroup in fair, proportional distribution"]
-    Ran["4. Random Selection\nEvery unit has an equal or known non-zero probability of inclusion"]
-    Eco["5. Economical\nAchieves analytical goals with minimal operational overhead"]
-    Goa["6. Goal-Oriented\nStrictly aligned with the research hypothesis and survey conditions"]
+    Rep["1. Representative<br/>Accurately mirrors the demographic and technical traits of the population"]
+    Siz["2. Appropriately Sized<br/>Large enough to guarantee statistical stability and low margin of error"]
+    Unb["3. Unbiased<br/>Contains every subgroup in fair, proportional distribution"]
+    Ran["4. Random Selection<br/>Every unit has an equal or known non-zero probability of inclusion"]
+    Eco["5. Economical<br/>Achieves analytical goals with minimal operational overhead"]
+    Goa["6. Goal-Oriented<br/>Strictly aligned with the research hypothesis and survey conditions"]
 
     Crit --> Rep & Siz & Unb & Ran & Eco & Goa
 ```
@@ -246,8 +246,8 @@ Sampling techniques are divided into two main categories: probability sampling a
 ```mermaid
 flowchart TD
     Methods["Sampling Techniques"]
-    Prob["Probability Sampling\n(Known, non-zero inclusion probability πᵢ > 0)\n• Unbiased parameter estimation\n• Quantifiable sampling error\n• Essential for scientific inference"]
-    NonProb["Non-Probability Sampling\n(Inclusion probabilities unknown or zero)\n• Subjective or convenience selection\n• Higher risk of systematic bias\n• Cannot calculate margin of error"]
+    Prob["Probability Sampling<br/>(Known, non-zero inclusion probability πᵢ &gt; 0)<br/>• Unbiased parameter estimation<br/>• Quantifiable sampling error<br/>• Essential for scientific inference"]
+    NonProb["Non-Probability Sampling<br/>(Inclusion probabilities unknown or zero)<br/>• Subjective or convenience selection<br/>• Higher risk of systematic bias<br/>• Cannot calculate margin of error"]
 
     Methods --> Prob
     Methods --> NonProb
@@ -345,8 +345,8 @@ Total error in an empirical study consists of two components:
 ```mermaid
 flowchart TD
     TotErr["Total Study Error"]
-    SE["Sampling Error\n• Random variation from observing a subset\n• Shrinks as sample size n increases\n• Can be quantified mathematically"]
-    NSE["Non-Sampling Error (Systematic Bias)\n• Design flaws, bad frames, measurement errors\n• Does NOT shrink as n increases\n• Cannot be corrected by larger samples"]
+    SE["Sampling Error<br/>• Random variation from observing a subset<br/>• Shrinks as sample size n increases<br/>• Can be quantified mathematically"]
+    NSE["Non-Sampling Error (Systematic Bias)<br/>• Design flaws, bad frames, measurement errors<br/>• Does NOT shrink as n increases<br/>• Cannot be corrected by larger samples"]
 
     TotErr --> SE
     TotErr --> NSE

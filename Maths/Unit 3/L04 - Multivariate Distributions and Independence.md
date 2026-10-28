@@ -17,10 +17,10 @@ When two or more random variables are defined on the same sample space $\Omega$,
 ```mermaid
 flowchart TD
     subgraph MultiWorld ["Joint Probability Space"]
-        Joint["Joint Distribution: p(x, y) or f(x, y)\nSimultaneous behavior of all variables"]
+        Joint["Joint Distribution: p(x, y) or f(x, y)<br/>Simultaneous behavior of all variables"]
         MargX["Marginal X: Sum/Integrate over Y"]
         MargY["Marginal Y: Sum/Integrate over X"]
-        CondY["Conditional Y | X = x:\np(x, y) / p(x)"]
+        CondY["Conditional Y | X = x:<br/>p(x, y) / p(x)"]
 
         Joint --> MargX
         Joint --> MargY
@@ -197,11 +197,11 @@ Here is one of the most common conceptual pitfalls in machine learning and stati
 
 ```mermaid
 flowchart TD
-    Ind["X and Y are Independent\n(f(x, y) = f(x) f(y))"]
-    ZeroCov["Cov(X, Y) = 0\n(X and Y are Uncorrelated)"]
+    Ind["X and Y are Independent<br/>(f(x, y) = f(x) f(y))"]
+    ZeroCov["Cov(X, Y) = 0<br/>(X and Y are Uncorrelated)"]
 
     Ind -- "ALWAYS IMPLIES" --> ZeroCov
-    ZeroCov -- "DOES NOT IMPLY\n(Counterexamples exist!)" --> Ind
+    ZeroCov -- "DOES NOT IMPLY<br/>(Counterexamples exist!)" --> Ind
 ```
 
 - If $X$ and $Y$ are independent, then:

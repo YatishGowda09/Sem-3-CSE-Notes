@@ -174,7 +174,7 @@ Computers handle many different kinds of storage, and they form a strict hierarc
 ```mermaid
 flowchart TD
     subgraph Volatile ["Volatile Storage (Loses Data on Power Loss)"]
-        REG["Registers (< 1 ns, Bytes, Built into CPU)"]
+        REG["Registers (&lt; 1 ns, Bytes, Built into CPU)"]
         CACHE["Cache: L1, L2, L3 (1 - 10 ns, Megabytes, Static RAM)"]
         RAM["Main Memory / RAM (50 - 100 ns, Gigabytes, Dynamic RAM)"]
     end

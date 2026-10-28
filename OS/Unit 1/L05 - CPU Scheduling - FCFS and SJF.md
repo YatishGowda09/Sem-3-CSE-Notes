@@ -34,12 +34,17 @@ Every program execution consists of an alternating sequence of two phases:
 If you measure thousands of processes across a real operating system and plot the frequency of their CPU bursts, an unmistakable pattern appears:
 
 ```mermaid
-xychart-beta
-    title "Empirical Distribution of CPU Burst Durations"
-    x-axis ["0-2ms", "2-4ms", "4-6ms", "6-8ms", "8-10ms", "10-20ms", "20-40ms", ">40ms"]
-    y-axis "Relative Frequency (%)" 0 --> 60
-    bar [52, 21, 11, 6, 4, 3, 2, 1]
-```
+flowchart TD
+    subgraph BURSTS["Frequency of CPU Burst Durations (Hyperexponential Decay)"]
+        direction TB
+        B1["0 - 2 ms: 52% of all bursts (Massive Majority: Short / I/O-bound)"]
+        B2["2 - 4 ms: 21% of all bursts"]
+        B3["4 - 6 ms: 11% of all bursts"]
+        B4["6 - 8 ms: 6% of all bursts"]
+        B5["8 - 10 ms: 4% of all bursts"]
+        B6["&gt; 10 ms: 6% of all bursts (Rare: Heavy CPU-bound computation)"]
+        B1 --- B2 --- B3 --- B4 --- B5 --- B6
+    end```
 
 Notice the extreme skew:
 - The vast majority of CPU bursts are **extremely short** (typically under 4 milliseconds). These belong to interactive apps and I/O-bound processes that do a quick calculation and immediately issue an I/O system call.

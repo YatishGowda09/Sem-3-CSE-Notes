@@ -81,7 +81,7 @@ Optical fiber transmits data as pulses of light (photons) through thin strands o
 flowchart LR
     subgraph "Optical Fiber Cable Structure"
         CORE["Glass Core<br/>High Index of Refraction (n1)"]
-        CLAD["Glass Cladding<br/>Lower Index of Refraction (n2 < n1)"]
+        CLAD["Glass Cladding<br/>Lower Index of Refraction (n2 &lt; n1)"]
         BUFF["Protective Buffer / Jacket"]
     end
     CORE --- CLAD --- BUFF

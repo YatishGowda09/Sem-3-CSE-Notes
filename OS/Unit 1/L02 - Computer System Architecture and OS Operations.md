@@ -83,8 +83,8 @@ flowchart TD
     end
 
     subgraph Cluster ["Clustered System (Network Coupled)"]
-        NODE1["Server Node 1 (Private RAM)"] <==> SAN["Shared Storage Area Network (SAN)"]
-        NODE2["Server Node 2 (Private RAM)"] <==> SAN
+        NODE1["Server Node 1 (Private RAM)"] <--> SAN["Shared Storage Area Network (SAN)"]
+        NODE2["Server Node 2 (Private RAM)"] <--> SAN
     end
 ```
 

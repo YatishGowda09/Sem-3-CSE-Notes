@@ -88,13 +88,15 @@ Notice the mathematical miracle: **$N$ vanishes from the equation!**
 As the population of peers scales toward infinity, the distribution time does not explode linearly. Instead, it asymptotes toward a flat constant: $\frac{F}{u}$, the time it takes an average peer to upload the file once. Every new consumer that arrives brings exactly enough upload capacity to service its own demand.
 
 ```mermaid
-xychart-beta
-    title "Distribution Time vs Number of Peers (N)"
-    x-axis [10, 100, 500, 1000, 5000, 10000]
-    y-axis "Time (Hours)" 0 --> 50
-    line [0.5, 1.2, 5.0, 10.0, 50.0, 100.0]
-    line [0.4, 0.7, 0.9, 0.95, 0.98, 1.0]
-```
+flowchart LR
+    subgraph CS["Client-Server Distribution: O(N) Linear Growth"]
+        direction TB
+        CS1["N = 10 peers: 0.5 hrs"] --> CS2["N = 500 peers: 5.0 hrs"] --> CS3["N = 1,000 peers: 10 hrs"] --> CS4["N = 10,000 peers: 100 hrs (Bottleneck!)"]
+    end
+    subgraph P2P["P2P BitTorrent Distribution: Self-Scaling Asymptote"]
+        direction TB
+        P1["N = 10 peers: 0.4 hrs"] --> P2["N = 500 peers: 0.9 hrs"] --> P3["N = 1,000 peers: 0.95 hrs"] --> P4["N = 10,000 peers: ~1.0 hr (Saturated Upload)"]
+    end```
 
 *(Above: Client-Server distribution time climbs linearly, while P2P distribution time flattens asymptotically).*
 

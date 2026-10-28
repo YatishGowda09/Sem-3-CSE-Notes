@@ -179,8 +179,8 @@ flowchart LR
         SW2 --- H4["Host B2"]
     end
 
-    SW1 <==|"Interface eth0: 192.168.1.1"|==> ROUTER_BOX
-    ROUTER_BOX <==|"Interface eth1: 10.0.0.1"|==> SW2
+    SW1 <-->|"Interface eth0: 192.168.1.1"| ROUTER_BOX
+    ROUTER_BOX <-->|"Interface eth1: 10.0.0.1"| SW2
 ```
 
 - **Highest Layer:** Layer 3 (Network Layer).

@@ -187,7 +187,7 @@ sequenceDiagram
 
     P->>Sem: Calls wait(S)
     Sem->>Sem: value decrements: 0 -> -1
-    Note over Sem: value < 0! Process must sleep!
+    Note over Sem: value &lt; 0! Process must sleep!
     Sem->>Sem: Adds Process P to list
     Sem->>OS: Invokes block()
     OS->>P: Context switch off CPU! (State -> Waiting)
@@ -303,12 +303,12 @@ sequenceDiagram
     L->>Lock: 1. Acquires Mutex Lock
     Note over L: L begins executing critical section
     H->>H: 2. High-priority task wakes up!
-    Note over H: H preempts L (since Priority H > L)
+    Note over H: H preempts L (since Priority H &gt; L)
     H->>Lock: 3. H attempts to acquire Mutex Lock
     Note over H: Mutex held by L! H BLOCKS and goes to sleep!
     Note over L: L resumes execution to finish CS
     M->>M: 4. Medium-priority task wakes up!
-    Note over M: M does NOT need the lock! Priority M > L!
+    Note over M: M does NOT need the lock! Priority M &gt; L!
     M->>L: 5. M PREEMPTS L! M runs on the CPU!
     Note over H,M: DISASTER! Medium task M is running, while High task H is blocked indefinitely!
 ```

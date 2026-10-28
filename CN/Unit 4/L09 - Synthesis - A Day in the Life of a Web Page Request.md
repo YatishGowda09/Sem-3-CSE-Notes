@@ -265,11 +265,11 @@ sequenceDiagram
     participant Laptop_TCP as Laptop TCP Stack
     participant Google_TCP as Google Server TCP
     participant Google_HTTP as Google Web Server
-    Browser->>Laptop_TCP: write("GET / HTTP/1.1\r\nHost: www.google.com\r\n...")
+    Browser->>Laptop_TCP: write("GET / HTTP/1.1 [CRLF]Host: www.google.com [CRLF]...")
     Laptop_TCP->>Google_TCP: IP Packet carrying HTTP GET Request
     Google_TCP->>Google_HTTP: Deliver HTTP Request
     Note over Google_HTTP: Server processes request, retrieves index.html
-    Google_HTTP->>Google_TCP: write("HTTP/1.1 200 OK\r\nContent-Type: text/html\r\n...")
+    Google_HTTP->>Google_TCP: write("HTTP/1.1 200 OK [CRLF]Content-Type: text/html [CRLF]...")
     Google_TCP->>Laptop_TCP: Stream of TCP Segments carrying HTML body
     Note over Laptop_TCP: Reassembles byte stream in order, sends ACKs
     Laptop_TCP->>Browser: Deliver HTTP Response Body

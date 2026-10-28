@@ -60,8 +60,8 @@ For every memory address the CPU generates in user mode, hardware checks:
 
 ```mermaid
 flowchart TD
-    CPU["CPU generates address"] --> C1{"Address >= Base?"}
-    C1 -- "Yes" --> C2{"Address < Base + Limit?"}
+    CPU["CPU generates address"] --> C1{"Address &ge; Base?"}
+    C1 -- "Yes" --> C2{"Address &lt; Base + Limit?"}
     C1 -- "No" --> TRAP["Trap to OS (segfault)"]
     C2 -- "Yes" --> MEM["Allow access to RAM"]
     C2 -- "No" --> TRAP

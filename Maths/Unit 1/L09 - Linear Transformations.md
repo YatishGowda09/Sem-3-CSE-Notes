@@ -140,12 +140,12 @@ Just as matrices have null spaces and column spaces, linear transformations have
 ```mermaid
 flowchart LR
     subgraph DomainV["Domain V (R^n)"]
-        Ker["Kernel: ker(T)\nAll v where T(v) = 0"]
+        Ker["Kernel: ker(T)<br/>All v where T(v) = 0"]
         OtherV["Remaining Domain: V \\ ker(T)"]
     end
 
     subgraph CodomainW["Codomain W (R^m)"]
-        Range["Range: range(T)\nAll reached outputs T(v)"]
+        Range["Range: range(T)<br/>All reached outputs T(v)"]
         ZeroW["Zero Vector 0_W"]
         OtherW["Unreached space in W"]
     end

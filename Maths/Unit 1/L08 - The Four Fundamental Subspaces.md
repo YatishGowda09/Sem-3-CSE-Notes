@@ -25,15 +25,15 @@ Two subspaces live inside the output codomain $\mathbb{R}^m$:
 ```mermaid
 flowchart LR
     subgraph Domain["Input Domain: R^n"]
-        RowSpace["Row Space C(A^T)\nDimension: r"]
-        NullSpace["Null Space N(A)\nDimension: n - r"]
-        RowSpace -.- Ortho1["Orthogonal Complements\nR^n = C(A^T) ⊕ N(A)"] -.- NullSpace
+        RowSpace["Row Space C(A^T)<br/>Dimension: r"]
+        NullSpace["Null Space N(A)<br/>Dimension: n - r"]
+        RowSpace -.- Ortho1["Orthogonal Complements<br/>R^n = C(A^T) ⊕ N(A)"] -.- NullSpace
     end
 
     subgraph Codomain["Output Codomain: R^m"]
-        ColSpace["Column Space C(A)\nDimension: r"]
-        LeftNull["Left Null Space N(A^T)\nDimension: m - r"]
-        ColSpace -.- Ortho2["Orthogonal Complements\nR^m = C(A) ⊕ N(A^T)"] -.- LeftNull
+        ColSpace["Column Space C(A)<br/>Dimension: r"]
+        LeftNull["Left Null Space N(A^T)<br/>Dimension: m - r"]
+        ColSpace -.- Ortho2["Orthogonal Complements<br/>R^m = C(A) ⊕ N(A^T)"] -.- LeftNull
     end
 
     RowSpace -- "A acts as an invertible isomorphism (x_row -> A*x_row)" --> ColSpace
