@@ -1,6 +1,6 @@
-# Computer Science & AI Coursework Vault (Semester 3)
+# PESU SEM-3 Course Notes 
 
-Welcome! This repository is a comprehensive, intuitive, and deeply structured collection of coursework study notes covering core 3rd-semester subjects in Computer Science & Engineering and AI & Data Science.
+This repository is a comprehensive, intuitive, and deeply structured collection of coursework study notes covering core 3rd-semester subjects in Computer Science & Engineering and AI & Data Science.
 
 If you've ever felt that university lecture slides are too brief and formula-heavy, while 1,000-page textbooks take way too long to navigate right before an exam, this vault bridges that gap. Every note is written in a conversational, "think-out-loud" style: explaining *why* things work from first principles before throwing math or code at you, walking through complete step-by-step examples, and visualizing concepts with clean Mermaid diagrams.
 
