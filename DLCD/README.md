@@ -1,6 +1,6 @@
 # Digital Logic and Computer Design: Complete Coursework Curriculum and Topic Index
 
-Welcome to the comprehensive coursework study vault for **Digital Logic and Computer Design (DLCD / DDCO)**.
+Welcome to the comprehensive coursework study vault for **Digital Logic and Computer Design (DLCD / DDCO — Course Code: `UE25CS251A`)**.
 
 This vault contains exhaustive, highly structured, and intuitive coursework notes synthesizing lecture decks from PES University and foundational principles from the prescribed textbooks:
 - **T1: M. Morris Mano & Michael D. Ciletti**, *Digital Design: With an Introduction to the Verilog HDL* (5th Edition, Pearson).
