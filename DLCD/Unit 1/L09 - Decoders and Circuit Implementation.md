@@ -91,9 +91,9 @@ When an active-high Enable input is added:
 The Boolean equations incorporate $E$ directly:
 $$D_i = m_i \cdot E$$
 
-### Active-Low Logic and the 74LS138
+### Active-Low Logic and Inverted Enable Inputs
 
-In commercial MSI chips (such as the industry-standard **74LS138 3-to-8 decoder**), decoders are almost always designed with **active-low outputs** and **active-low enable lines** ($\overline{E}$).
+In many practical digital circuits, decoders are designed with **active-low outputs** and **active-low enable lines** ($\overline{E}$).
 
 Why active-low?
 1. **NAND gates are faster**: In silicon technologies like CMOS and TTL, an inverting gate (NAND/NOR) is physically faster and requires fewer transistors than a non-inverting gate (AND/OR).

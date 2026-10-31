@@ -2,239 +2,250 @@
 
 # L05 - Assembly Language and Program Execution
 
-At the lowest physical level, a computer understands only raw binary bit patterns: voltages charging gates inside the instruction register. Humans, however, cannot write or debug streams of hexadecimal numbers like `0xE59F1004` without making constant errors.
+High-level programming languages like C, Java, and Python allow developers to write algorithms using abstract mathematical expressions and loops. However, the physical processor understands only one thing: **binary machine code**—streams of $0$s and $1$s packed into specific bit fields that toggle control wires.
 
-To bridge the gap between human programmers and physical silicon, the computer industry developed **Assembly Language**: a human-readable symbolic representation of machine instructions.
+Writing raw machine code by hand is painfully slow and prone to catastrophic error. To bridge the gap between human readability and physical hardware execution, we use **Assembly Language**.
 
-In this lecture, we examine the **translation toolchain**, analyze **assembly syntax and assembler directives**, dissect the mechanics of **subroutines and parameter passing**, and trace the architecture of the **processor stack frame**.
-
----
-
-## The Program Translation Toolchain
-
-How does a high-level C/C++ program become voltage pulses executed by the CPU? It travels through a multi-stage software translation pipeline:
-
-```mermaid
-flowchart LR
-    C_SRC["C Source Code (main.c)"] --> COMPILER["Compiler (gcc / clang)"]
-    COMPILER --> ASM_SRC["Assembly Code (main.s)"]
-    ASM_SRC --> ASSEMBLER["Assembler (as)"]
-    ASSEMBLER --> OBJ_FILE["Object File (main.o)"]
-    LIB["System Libraries (libc.a)"] --> LINKER["Linker (ld)"]
-    OBJ_FILE --> LINKER
-    LINKER --> EXEC["Executable Binary (a.out)"]
-    EXEC --> LOADER["OS Loader"]
-    LOADER --> RAM["Primary Memory (RAM)"]
-```
-
-1. **Compiler**: Translates high-level constructs (`for`, `if`, arithmetic) into architecture-specific assembly language statements (`.s`).
-2. **Assembler**: Translates symbolic assembly mnemonics into raw binary machine code, generating an **Object File (`.o`)**. The object file contains binary opcodes, raw data, and a symbol table listing functions and external references.
-3. **Linker**: Resolves cross-file references, combines multiple object files with pre-compiled system libraries, and merges them into a single, cohesive **Executable Binary**.
-4. **Loader**: An operating system utility that copies the executable from disk into RAM, resolves dynamic library addresses, allocates the stack and heap, and jumps the Program Counter to the entry point (`_start` / `main`).
+In assembly language, binary opcodes are replaced with intuitive text abbreviations called **mnemonics**, memory addresses are replaced with symbolic names (labels), and numbers can be written in decimal or hexadecimal. In this lecture, we examine assembly language syntax, assembler directives, the two-pass assembly process, and how programs are loaded into memory for execution.
 
 ---
 
 ## Assembly Language Syntax
 
-An assembly language source file is composed of a sequence of text lines. Each line follows a standardized four-column format:
+An assembly language program consists of a sequence of text statements. Each statement corresponds either to a single machine instruction or to an instruction for the assembler itself.
 
-$$\mathbf{\text{[Label:]} \quad \text{Mnemonic (Opcode)} \quad \text{[Operands]} \quad \text{[; Comment]}}$$
+A standard assembly instruction statement is divided into four distinct fields:
 
-```assembly
-LOOP:   ADD     R1, R1, #1      ; Increment counter register R1
-        CMP     R1, #10         ; Compare counter against limit 10
-        BNE     LOOP            ; If R1 != 10, branch back to LOOP
+$$\mathbf{[Label] \quad Operation \quad Operand(s) \quad [Comment]}$$
+
+```mermaid
+flowchart LR
+    subgraph Statement_Fields["Fields of an Assembly Statement"]
+        direction LR
+        L["1. Label<br/>(Optional symbolic address)"]
+        OP["2. Operation<br/>(Mnemonic opcode)"]
+        OPER["3. Operands<br/>(Registers, memory, immediates)"]
+        COMM["4. Comment<br/>(Documentation; ignored by CPU)"]
+        
+        L --- OP --- OPER --- COMM
+    end
 ```
 
-Let's dissect each field:
-1. **Label**: An optional symbolic identifier placed at the start of a line (often followed by a colon). The assembler assigns the label a numerical value equal to the memory address where that instruction or data item will be located. Labels eliminate the need for programmers to calculate hardcoded memory addresses for jumps and variables.
-2. **Mnemonic (Opcode)**: The symbolic name of the hardware instruction (e.g., `ADD`, `SUB`, `MOV`, `LDR`, `STR`, `JMP`, `BEQ`). The assembler maps each mnemonic to its physical binary opcode.
-3. **Operands**: The input parameters required by the instruction. Operands may be register names (`R1`), immediate constants (`#10`), or memory address labels (`TOTAL`).
-4. **Comments**: Text preceded by a delimiter (typically `;` or `//`). Comments are ignored by the assembler and serve entirely for human documentation.
+### 1. Label Field
+An optional identifier placed at the very start of a line (often followed by a colon). The assembler assigns the label a numerical value equal to the memory address where the instruction or data item will be stored. Labels allow programmers to jump to target locations (e.g., `LOOP:`, `START:`) without calculating raw numerical memory addresses.
+
+### 2. Operation Field
+Specifies the operation to be performed. This can be:
+- An **Instruction Mnemonic**: A symbolic name for a hardware machine instruction (e.g., `Move`, `Add`, `Subtract`, `Branch`).
+- An **Assembler Directive**: A command to the assembler program (e.g., `ORIGIN`, `EQU`, `DATAWORD`).
+
+### 3. Operand Field
+Specifies the data items on which the instruction operates. Depending on the addressing mode, an operand can be:
+- A processor register: `R0`, `R1`
+- A memory address or symbolic label: `SUM`, `TOTAL`
+- An immediate numerical constant: `#100`, `#2FH`
+
+### 4. Comment Field
+Begins with a special character (such as a semicolon `;` or slash) and extends to the end of the line. Comments are purely for human documentation and are discarded by the assembler.
+
+### Example Assembly Statements
+
+```assembly
+LOOP:   Add     (R2)+, R0       ; Add number pointed to by R2 to R0, then autoincrement R2
+        Decrement R1            ; Decrement loop counter
+        Branch_gt LOOP          ; If R1 > 0, branch back to label LOOP
+        Move    R0, SUM         ; Store final total into memory location SUM
+```
+
+---
+
+## Number Notation
+
+Assembly languages support multiple number representations so programmers can write values in the format that best fits the data:
+- **Decimal Numbers**: Written directly as standard numbers (e.g., `ADD #93, R1` adds decimal 93).
+- **Hexadecimal Numbers**: Indicated by a trailing `H` or prefix `0x` (e.g., `ADD #2BH, R1` or `ADD #0x2B, R1`).
+- **Binary Numbers**: Indicated by a trailing `B` or prefix `%` (e.g., `ADD #%1011101, R1`).
+
+The immediate prefix symbol `#` informs the assembler that the value is an **immediate constant operand**, not a memory address!
+- `Move 100, R1` $\implies$ Copy the contents of memory address 100 into `R1`.
+- `Move #100, R1` $\implies$ Load the actual numerical constant 100 directly into `R1`.
 
 ---
 
 ## Assembler Directives (Pseudo-Instructions)
 
-Not every line in an assembly file corresponds to a hardware CPU instruction. Many lines are instructions directed **to the assembler program itself**, commanding it how to organize memory, define constants, or reserve space.
+Unlike regular machine instructions, which are translated into binary opcodes and executed by the CPU, **Assembler Directives** are commands directed exclusively to the assembler program during the translation process. They generate no machine instructions of their own.
 
-These are called **Assembler Directives** (or **Pseudo-Ops**):
-
-```assembly
-        .ORIG   0x2000          ; Directive: Place following code at address 0x2000
-MAX_VAL .EQU    100             ; Directive: Define symbolic constant MAX_VAL = 100
-
-        .DATA                   ; Directive: Switch to Data Segment
-COUNT   .WORD   0               ; Directive: Reserve 4-byte word initialized to 0
-MESSAGE .STRING "HELLO"         ; Directive: Reserve null-terminated ASCII string
-
-        .TEXT                   ; Directive: Switch to Code (Instruction) Segment
-START:  LDR     R0, COUNT       ; Real CPU instruction: Load variable COUNT into R0
-        ADD     R0, R0, #1      ; Real CPU instruction: Increment R0
-        STR     R0, COUNT       ; Real CPU instruction: Store R0 back to memory
-        .END                    ; Directive: Marks physical end of assembly source
-```
-
-### Common Assembler Directives:
-- **`ORIG` / `ORG <address>`**: Sets the assembler's Location Counter, dictating the starting memory address for subsequent instructions.
-- **`EQU <symbol>, <value>`**: Associates a constant value with a symbolic name. Replaced textually during assembly with zero memory cost.
-- **`DATA` and `TEXT`**: Informs the linker to partition memory into read-only executable code segments (`.text`) versus read-write variable data segments (`.data`).
-- **`BYTE`, `WORD`, `SPACE`**: Reserves storage in memory:
-  - `.BYTE 5, 12, 0xFF`: Allocates consecutive 8-bit bytes.
-  - `.WORD 1000`: Allocates an aligned 32-bit (4-byte) integer.
-  - `.SPACE 64`: Reserves a block of 64 uninitialized bytes (e.g., an empty buffer).
-
----
-
-## Subroutines and the Return Address Problem
-
-Modern software is built from modular, reusable functions known in hardware as **Subroutines** (or **Procedures**).
-
-When a program invokes a subroutine, execution must:
-1. Jump the Program Counter to the first instruction of the subroutine.
-2. Execute the subroutine body.
-3. Jump *back* to the calling program at the exact instruction immediately following the call instruction.
+Assembler directives define where code and data are located in memory, allocate storage space, define constants, and mark the end of the source file.
 
 ```mermaid
 flowchart TD
-    MAIN1["Main Program: Instruction 1"] --> MAIN2["Main Program: Call SUB"]
-    MAIN2 -- "1. Jump to SUB" --> SUB1["Subroutine SUB: Step 1"]
-    SUB1 --> SUB2["Subroutine SUB: Step 2"]
-    SUB2 --> RET["Return Instruction (RET)"]
-    RET -- "2. Return to Main" --> MAIN3["Main Program: Instruction 3 (PC + 4)"]
-```
-
-The memory address of `Instruction 3` is called the **Return Address**.
-
-How should the processor remember the return address?
-- **Attempt 1: Dedicated CPU Register (Link Register)**:
-  In simple RISC architectures (like ARM's `LR` register), executing `BL SUB` (Branch with Link) automatically copies the return address into register $R_{14}$ (`LR`).
-  *The Fatal Flaw*: What happens if `SUB` itself calls a second subroutine `SUB2`? 
-  The new call will overwrite `LR`! The original return address back to `Main` is erased forever.
-- **The Universal Solution: The Processor Stack**:
-  To support nested function calls and recursive programming, return addresses must be saved in a **Last-In, First-Out (LIFO)** data structure in memory: the **Stack**.
-
----
-
-## The Processor Stack
-
-The **Processor Stack** is a dynamically managed region of RAM. A dedicated internal CPU register called the **Stack Pointer (SP)** permanently holds the memory address of the current **Top of the Stack (TOS)**.
-
-### Architectural Convention: Stacks Grow Downward
-In virtually all modern computer architectures (x86, ARM, RISC-V, MIPS):
-- The stack starts at a **high memory address** and **grows downward toward lower memory addresses**.
-- Pushing data onto the stack *decrements* the Stack Pointer.
-- Popping data from the stack *increments* the Stack Pointer.
-
-```
-High Memory:    +-------------------------+
-                | Previous Stack Data     |
-                +-------------------------+
-                | Word 1                  |
-                +-------------------------+
-SP Points Here: | Top of Stack (Word 2)   |  <- Lower Address
-                +-------------------------+
-                | Unused / Available      |  |
-Low Memory:     +-------------------------+  v (Stack Grows Downward)
-```
-
----
-
-### Hardware Push and Pop Operations
-
-1. **The Push Operation (`PUSH R1`)**:
-   Pushes the contents of register $R_1$ onto the stack:
-   $$\text{SP} \leftarrow \text{SP} - 4 \quad \text{(Pre-decrement Stack Pointer)}$$
-   $$\text{Memory}[\text{SP}] \leftarrow R_1 \quad \text{(Write data to top of stack)}$$
-2. **The Pop Operation (`POP R1`)**:
-   Retrieves the top word from the stack and places it into register $R_1$:
-   $$R_1 \leftarrow \text{Memory}[\text{SP}] \quad \text{(Read data from top of stack)}$$
-   $$\text{SP} \leftarrow \text{SP} + 4 \quad \text{(Post-increment Stack Pointer)}$$
-
-Notice something we learned in Lecture 4: **Push is physically an Autodecrement store (`STR R1, [SP, #-4]!`), and Pop is physically an Autoincrement load (`LDR R1, [SP], #4`)!**
-
----
-
-### Hardware Mechanics of `CALL` and `RETURN`
-
-When the CPU executes a hardware subroutine call instruction:
-$$\mathbf{\text{CALL SUB}}$$
-
-The processor automatically performs two microscopic steps in hardware:
-1. Pushes the return address (the address of the instruction following the `CALL`, i.e., $\text{PC} + 4$) onto the stack:
-   $$\text{SP} \leftarrow \text{SP} - 4$$
-   $$\text{Memory}[\text{SP}] \leftarrow \text{PC}$$
-2. Loads the target address of the subroutine into the Program Counter:
-   $$\text{PC} \leftarrow \text{Address of SUB}$$
-
-When the subroutine finishes, it terminates with:
-$$\mathbf{\text{RET} \quad \text{(Return)}}$$
-
-The processor executes:
-1. Pops the saved return address from the top of the stack directly into the Program Counter:
-   $$\text{PC} \leftarrow \text{Memory}[\text{SP}]$$
-   $$\text{SP} \leftarrow \text{SP} + 4$$
-
-Because the stack is LIFO, functions can call functions to arbitrary depths. The return addresses are unwound in the exact reverse order of invocation, making infinite nesting and recursion mathematically sound.
-
----
-
-## The Subroutine Stack Frame (Activation Record)
-
-When a high-level language compiler translates a function, it does not use the stack merely for return addresses. It allocates a dedicated memory block on the stack called a **Stack Frame** (or **Activation Record**) for every single function invocation.
-
-```mermaid
-flowchart TD
-    subgraph Stack_Frame["Stack Frame (Activation Record) Layout"]
-        direction TB
-        PARAM["Parameters passed to function (arg1, arg2, ...)"]
-        RET_ADDR["Return Address (PC + 4)"]
-        SAVED_FP["Saved Frame Pointer (Old FP / EBP)"]
-        SAVED_REG["Saved Callee-Saved Registers (R4, R5, ...)"]
-        LOCALS["Local Variables declared inside function"]
+    subgraph Directives["Key Assembler Directives"]
+        ORIGIN["ORIGIN &lt;address&gt;<br/>Sets the memory location counter"]
+        EQU["&lt;name&gt; EQU &lt;value&gt;<br/>Defines a symbolic constant"]
+        DATAWORD["DATAWORD &lt;value&gt;<br/>Initializes memory with constant data"]
+        RESERVE["RESERVE &lt;bytes&gt;<br/>Allocates uninitialized memory block"]
+        RETURN["RETURN<br/>Marks completion of program routine"]
+        END["END [&lt;start_label&gt;]<br/>Informs assembler source file has ended"]
     end
 ```
 
-### Frame Pointer (FP) vs. Stack Pointer (SP)
-- **Stack Pointer (SP)**: Moves constantly during function execution as intermediate values are pushed and popped.
-- **Frame Pointer (FP)**: A fixed reference register (often `R11` in ARM or `EBP`/`RBP` in x86). When a function is entered, the FP is set to the base of the current stack frame.
-- **The Advantage**: Local variables and passed parameters can be accessed at **constant, fixed offsets from the FP** (e.g., `[FP, #-8]` for local variable 1, `[FP, #8]` for parameter 1), completely unaffected by fluctuations in the SP!
+### 1. `ORIGIN`
+Tells the assembler the starting physical memory address where the subsequent machine instructions or data items must be placed.
+```assembly
+        ORIGIN  204     ; Place following instructions starting at byte address 204
+```
+
+### 2. `EQU` (Equate)
+Associates a symbolic name with a fixed numerical value. It does not allocate memory; it simply acts like a `#define` constant in C.
+```assembly
+SUM     EQU     200     ; Wherever 'SUM' appears, substitute the value 200
+```
+
+### 3. `DATAWORD`
+Initializes a word of memory with a specific data value.
+```assembly
+N       DATAWORD 5      ; Allocate 1 word of memory initialized to the integer 5
+```
+
+### 4. `RESERVE`
+Allocates an uninitialized block of consecutive memory bytes without writing data into them (e.g., reserving memory for an array or output buffer).
+```assembly
+ARRAY   RESERVE 400     ; Reserve 400 contiguous bytes of memory
+```
+
+### 5. `RETURN` and `END`
+- `RETURN`: Identifies the point where execution of a program or routine should terminate (returning control back to the operating system).
+- `END`: The physical last line of the source code. It tells the assembler to stop reading the file and optionally specifies the program's starting entry point (e.g., `END START`).
 
 ---
 
-## Parameter Passing Mechanisms
+## A Complete Program Memory Layout Example
 
-How does a calling program pass arguments (`x`, `y`) to a subroutine, and how does the subroutine return the result?
+Consider a complete assembly program that adds a list of $n$ numbers:
 
-Three primary techniques exist:
+```assembly
+; Memory allocation for data variables
+        SUM     EQU     200     ; Define symbolic address for SUM
+        ORIGIN  204             ; Place data variables starting at address 204
+N       DATAWORD 100            ; Number of elements (N = 100)
+NUM1    RESERVE 400             ; Reserve 400 bytes for 100 integers (4 bytes each)
 
-### 1. Passing in Registers
-- The caller places parameters directly into designated general-purpose registers (e.g., in ARM ABI, registers `R0`–`R3` are reserved for arguments; in x86-64, `RDI`, `RSI`, `RDX`, `RCX`, `R8`, `R9`).
-- **Pros**: Fastest method possible (zero RAM accesses).
-- **Cons**: Limited by the number of CPU registers. If a function takes 10 arguments, registers run out!
+; Code segment
+        ORIGIN  100             ; Place instructions starting at address 100
+START:  Move    N, R1           ; Load count N into register R1
+        Move    #NUM1, R2       ; Load base address of array NUM1 into R2
+        Clear   R0              ; Clear accumulator register R0
 
-### 2. Passing in Memory Locations
-- The caller writes arguments into global memory locations, and the subroutine reads them.
-- **Cons**: Completely breaks in multi-threaded programs and cannot support recursion (the next call overwrites the memory variables).
+LOOP:   Add     (R2)+, R0       ; Add element pointed to by R2, advance pointer
+        Decrement R1            ; Decrement remaining count
+        Branch_gt LOOP          ; If R1 > 0, repeat loop
 
-### 3. Passing on the Stack (Universal Standard)
-- The caller pushes arguments onto the stack before executing the `CALL` instruction.
-- The subroutine reads the parameters using indexed addressing relative to the Frame Pointer (`[FP, #offset]`).
-- The return value is placed in register `R0` (or `RAX`).
-- **Pros**: Unlimited number of parameters, 100% thread-safe, and natively supports recursion.
+        Move    R0, SUM         ; Store final sum into location 200
+        RETURN                  ; Return control to OS
+        END     START           ; End of program; execution begins at START
+```
+
+```mermaid
+flowchart TD
+    subgraph Memory_Layout["Physical Memory Arrangement"]
+        direction TB
+        C1["Address 100: Move N, R1"]
+        C2["Address 104: Move #NUM1, R2"]
+        C3["Address 108: Clear R0"]
+        C4["Address 112: Add (R2)+, R0"]
+        C5["... Code Segment ..."]
+        
+        D1["Address 200: SUM (Result variable)"]
+        D2["Address 204: N = 100 (Count variable)"]
+        D3["Address 208..607: NUM1 Array (400 bytes reserved)"]
+        
+        C1 --- C2 --- C3 --- C4 --- C5
+        C5 -.- D1 --- D2 --- D3
+    end
+```
+
+---
+
+## Assembly and Execution of Programs
+
+How does an ASCII text file containing assembly statements get converted into electrons flowing through CPU registers?
+
+The transformation follows a three-stage pipeline:
+
+```mermaid
+flowchart LR
+    SRC["Source File<br/>(program.asm)"] --> ASM["Two-Pass Assembler"]
+    ASM --> OBJ["Object File<br/>(program.obj)"]
+    OBJ --> LOADER["Loader Utility"]
+    LOADER --> RAM["Main Memory (RAM)"]
+    RAM --> CPU["CPU Execution (PC = START)"]
+```
+
+### The Two-Pass Assembler
+Because instructions can branch forward to labels that have not yet been defined in the file (forward references), assemblers scan the source file in **two sequential passes**:
+
+1. **Pass 1: Symbol Table Construction**:
+   - The assembler maintains a **Location Counter (LC)** initialized by `ORIGIN` directives.
+   - It reads every statement line-by-line.
+   - Whenever it encounters a label in the label field, it records the label and the current value of LC into an internal database called the **Symbol Table**.
+   - It increments LC by the byte length of each instruction or data reservation.
+   - At the end of Pass 1, every symbolic label is mapped to a concrete physical address!
+
+2. **Pass 2: Machine Code Generation**:
+   - The assembler scans the source file a second time.
+   - It translates each mnemonic into its binary machine opcode.
+   - It looks up every label used in operand fields in the Symbol Table and substitutes the actual numerical address or relative offset.
+   - It outputs the completed binary instructions into an **Object File** on disk.
+
+```mermaid
+flowchart TD
+    subgraph Symbol_Table["Pass 1: Symbol Table"]
+        S1["START  -> 100"]
+        S2["LOOP   -> 112"]
+        S3["SUM    -> 200"]
+        S4["N      -> 204"]
+        S5["NUM1   -> 208"]
+    end
+```
+
+### The Loader Program
+The object file created by the assembler resides on secondary storage (disk/SSD). To execute:
+1. An operating system utility called the **Loader** reads the object program header.
+2. The header tells the loader the starting memory address (`ORIGIN`) and total length of the program.
+3. The loader copies the machine code bytes into the designated memory locations in RAM.
+4. Finally, the loader places the program's starting address (`START = 100`) into the processor's **Program Counter (PC)**.
+5. The CPU begins executing the first instruction, and the program runs.
+
+---
+
+## Basic Input/Output in Assembly
+
+Computers must communicate with user peripherals like keyboards and display screens. In basic I/O programming, keyboard and display interfaces provide two memory-mapped registers:
+- `DATAIN` / `DATAOUT`: Hold the ASCII character being read or sent.
+- `STATUS`: Contains hardware flags indicating readiness:
+  - $\text{SIN} = 1$: New character is available in `DATAIN`.
+  - $\text{SOUT} = 1$: Display is ready to accept a new character in `DATAOUT`.
+
+### Polling Loop in Assembly: Reading a Character
+```assembly
+READ:   TestBit #3, STATUS      ; Test SIN flag (bit 3)
+        Branch_zero READ        ; Loop until character arrives (busy-waiting)
+        Move    DATAIN, R0      ; Fetch character into register R0
+```
+
+This simple loop is called **Programmed I/O** (or polling). While functional, it wastes millions of CPU cycles waiting for slow humans. In the next lecture, we examine hardware interrupts to eliminate this inefficiency.
 
 ---
 
 ## Key Takeaways
 
-- The software compilation pipeline translates source code: **Compiler $\to$ Assembler $\to$ Linker $\to$ Loader $\to$ CPU Execution**.
-- An assembly line consists of: **[Label:] Mnemonic [Operands] [; Comments]**.
-- **Assembler Directives** (`.ORIG`, `.EQU`, `.DATA`, `.TEXT`, `.WORD`) are commands to the assembler tool, not executable machine instructions.
-- Subroutine invocation uses the **Processor Stack** to store return addresses, enabling arbitrary nesting and recursion.
-- In modern computers, the stack **grows downward** from high memory toward low memory.
-- `CALL` pushes $\text{PC} + 4$ onto the stack and updates the PC; `RET` pops the saved return address back into the PC.
-- A **Stack Frame** encapsulates return addresses, saved registers, function arguments, and local variables, addressed reliably via the **Frame Pointer (FP)**.
+- Assembly language uses mnemonic operation codes, symbolic labels, and user-defined names to make machine-level programming human-readable.
+- An assembly statement comprises four fields: optional Label, Operation (mnemonic or directive), Operands, and Comments.
+- Assembler directives (`ORIGIN`, `EQU`, `DATAWORD`, `RESERVE`, `END`) are instructions for the assembler tool, not machine instructions executed by the CPU.
+- Assemblers operate in two passes: Pass 1 builds the Symbol Table mapping labels to memory addresses; Pass 2 translates mnemonics and substitutes addresses to generate the binary Object File.
+- The Loader copies the object file from disk into RAM and sets the Program Counter to the entry label to initiate execution.
 
 ---
 
-Up to this point, our processor has executed programs in an isolated computational universe of CPU registers and memory. But real computers must communicate with the outside world: reading keypresses, streaming audio, and saving files to storage disks. In the next lecture, we examine [**Input-Output Organization and Accessing IO Devices**](L06%20-%20Input-Output%20Organization%20and%20Accessing%20IO%20Devices.md), comparing Memory-Mapped I/O against Port-Mapped I/O and analyzing polling routines.
+Now that we know how instructions are written, translated, and organized in memory, we need to examine how the CPU communicates with external hardware devices. In the next lecture, we explore [**Input-Output Organization, Polling, and Interrupts**](L06%20-%20Input-Output%20Organization,%20Polling,%20and%20Interrupts.md).

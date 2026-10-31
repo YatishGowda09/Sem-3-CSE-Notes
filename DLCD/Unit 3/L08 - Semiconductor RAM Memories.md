@@ -1,12 +1,12 @@
 [DLCD Index](../README.md) / [Unit 3: Computer Structure and Organization](Introduction.md)
 
-# L09 - Semiconductor RAM Memories
+# L08 - Semiconductor RAM Memories
 
 In the preceding lectures of Unit 3, we examined how processors execute instructions, evaluate addressing modes, and communicate with peripheral devices across buses. But every single instruction fetched by the CPU and every data block moved by DMA resides in **Semiconductor Random Access Memory (RAM)**.
 
 What does RAM look like beneath the plastic packaging? How does silicon store a bit of charge, how do memory decoders select words among billions of cells, and why does main memory require constant "refreshing" to keep its data from evaporating?
 
-In this final lecture of Unit 3, we dissect the internal 2D array organization of memory chips, contrast the **6T Static RAM (SRAM)** cell against the **1T Dynamic RAM (DRAM)** cell, trace **DDR SDRAM** architectures, and examine how memory chips are cascaded to expand word width and address capacity.
+In this final lecture of Unit 3, we dissect the internal 2D array organization of memory chips, contrast the **6T Static RAM (SRAM)** cell against the **1T Dynamic RAM (DRAM)** cell, examine **Synchronous and DDR SDRAM** architectures, and explore how small modular memory chips are cascaded to expand word length and address capacity.
 
 ---
 
@@ -91,7 +91,7 @@ flowchart TD
 ### SRAM Trade-Offs:
 - **Advantages**: Ultra-fast access times (sub-nanosecond to $2\text{ ns}$), simple interfacing, no refresh cycles.
 - **Disadvantages**: Large physical silicon area (6 transistors per single bit of data), high static power leakage, expensive per gigabyte.
-- **Primary Usage**: **On-chip CPU Caches (L1, L2, L3 caches)** and high-speed embedded register files.
+- **Primary Usage**: On-chip CPU registers, fast internal scratchpads, and high-speed cache memory.
 
 ---
 
@@ -142,7 +142,7 @@ While the refresh controller operates transparently in the background, refresh c
 | **Access Latency** | **$0.5 - 2.5\text{ ns}$** (Blazing fast) | **$10 - 50\text{ ns}$** (Slower) |
 | **Refresh Needed?** | **No** (Retains state statically) | **Yes** (Must refresh every 64 ms) |
 | **Read Cycle** | Non-destructive | **Destructive** (Requires automatic rewrite) |
-| **Primary Usage** | CPU L1, L2, L3 Caches | Primary Main Memory (System RAM) |
+| **Primary Usage** | CPU Registers, Cache Memories | Primary Main Memory (System RAM) |
 
 ---
 
@@ -164,15 +164,15 @@ Clock:       ___|‾‾‾‾|____|‾‾‾‾|____|‾‾‾‾|____
 Transfers:     D0   D1   D2   D3   D4   D5   (Two Transfers Per Clock Cycle!)
 ```
 
-### The DDR Evolution: Prefetch Buffering
+### Prefetch Buffering
 How does a DRAM chip feed data to the bus twice per clock cycle if the internal capacitor cells are relatively slow?
 
-It uses **Prefetch Buffering**: the internal memory core reads multiple words in parallel and serializes them onto the high-speed bus:
+It uses **Prefetch Buffering**: the internal memory core reads multiple words in parallel from memory rows and serializes them onto the high-speed bus:
 - **DDR1**: 2-bit prefetch (reads 2 words internally, outputs 2 words per clock cycle).
 - **DDR2**: 4-bit prefetch.
 - **DDR3**: 8-bit prefetch.
 - **DDR4**: 8-bit prefetch with independent Bank Groups.
-- **DDR5**: 16-bit prefetch, dual 32-bit sub-channels, and on-die Error Correction Coding (ECC), achieving bus transfer rates exceeding **6,400 MegaTransfers per second (MT/s)**.
+- **DDR5**: 16-bit prefetch, achieving bus transfer rates exceeding thousands of MegaTransfers per second.
 
 ---
 
@@ -236,28 +236,6 @@ flowchart TD
 
 ---
 
-## The Computer Memory Hierarchy
-
-No single memory technology satisfies all needs: SRAM is fast but too small and expensive; DRAM is vast and cheap but too slow; SSDs are massive and non-volatile but orders of magnitude slower than the CPU clock.
-
-Computer systems organize memory into a multi-tiered **Memory Hierarchy**:
-
-```mermaid
-flowchart TD
-    REG["CPU Registers: &lt; 1 ns | &lt; 2 KB (Fastest, Smallest, Highest Cost/GB)"]
-    L1["L1 Cache (SRAM): ~1 ns | 64 - 128 KB"]
-    L2["L2 Cache (SRAM): ~3 ns | 512 KB - 2 MB"]
-    L3["L3 Cache (SRAM): ~10 ns | 16 - 64 MB"]
-    DRAM["Main Memory (DDR SDRAM): ~50 - 80 ns | 16 - 128 GB"]
-    SSD["Secondary Storage (NVMe SSD): ~10 - 50 µs | 1 - 4 TB (Slowest, Largest, Lowest Cost/GB)"]
-
-    REG --> L1 --> L2 --> L3 --> DRAM --> SSD
-```
-
-By exploiting the **Principle of Locality** (Temporal and Spatial Locality), hardware keeps the data currently needed by the CPU in the fast upper caches, providing the illusion of a memory system that has the **speed of SRAM** with the **vast capacity and low cost of DRAM**.
-
----
-
 ## Unit 3 Summary: The Complete System Architecture
 
 With semiconductor memory complete, we have assembled the entire macro-architecture of a computer:
@@ -267,7 +245,6 @@ flowchart TD
     CPU["Unit 3 CPU Architecture"]
     CPU --- FETCH["Instruction Cycle: Fetch -> Decode -> Execute"]
     CPU --- ADDR["Addressing Modes: Immediate, Direct, Indirect, Indexed, PC-Relative"]
-    CPU --- STACK["Processor Stack Frame & Subroutines"]
     CPU --- IO["I/O Systems: Memory-Mapped I/O, Polling, Interrupts, DMA"]
     CPU --- MEM["Memory Subsystems: 2D Arrays, SRAM 6T, DRAM 1T, DDR SDRAM"]
 ```
@@ -279,14 +256,13 @@ We understand how a computer represents data, coordinates bus transactions, exec
 ## Key Takeaways
 
 - Memory chips are internally arranged as **2D Arrays** of rows (Word lines) and columns (Bit lines), controlled by row decoders, column multiplexers, and $\overline{\text{CS}}, \overline{\text{WE}}, \overline{\text{OE}}$ control lines.
-- **SRAM** uses a **6-Transistor (6T)** bistable latch. It is ultra-fast ($< 2\text{ ns}$) and static (no refresh needed), but large and power-hungry, making it the choice for CPU caches.
+- **SRAM** uses a **6-Transistor (6T)** bistable latch. It is ultra-fast ($< 2\text{ ns}$) and static (no refresh needed), but large and power-hungry, making it the choice for fast processor scratchpads and caches.
 - **DRAM** uses a **1-Transistor, 1-Capacitor (1T-1C)** cell. It is extraordinarily dense and cheap, but has destructive reads and requires **periodic refresh cycles every 64 ms** to prevent charge leakage.
-- **DDR SDRAM** transfers data on **both clock edges** (rising and falling) and uses prefetch buffers to deliver gigabytes per second of memory bandwidth.
+- **DDR SDRAM** transfers data on **both clock edges** (rising and falling) and uses prefetch buffers to deliver high memory bandwidth.
 - Memory modules expand **word size** by wiring address lines in parallel and splitting data lines, and expand **address capacity** by decoding higher-order address bits to drive Chip Select ($\overline{\text{CS}}$) lines.
-- The **Memory Hierarchy** bridges the speed-capacity gap by combining CPU registers, multi-level SRAM caches, dynamic RAM, and secondary storage.
 
 ---
 
 We understand how instructions are fetched and how data flows across the CPU. But what happens *inside* the execution core when an instruction commands `MUL` or `DIV`? How does an ALU multiply signed numbers at hardware speed, how does it handle IEEE 754 floating-point decimals, and how does the Control Unit generate micro-timing signals to execute instructions?
 
-We now enter our final conceptual territory: **Unit 4: Computer Arithmetic and Processing Unit / Control Unit Design**. Begin by reading the [**Unit 4 Introduction and Roadmap**](../Unit%204/Introduction.md), and then dive into [**L01 - Multiplication of Positive Numbers**](../Unit%204/L01%20-%20Multiplication%20of%20Positive%20Numbers.md).
+We now enter our final conceptual territory: **Unit 4: Computer Arithmetic and Processing Unit / Control Unit Design**. Begin by reading the [**Unit 4 Introduction and Roadmap**](../Unit%204/Introduction.md), and then dive into [**L01 - Unsigned Multiplication and Array Multipliers**](../Unit%204/L01%20-%20Unsigned%20Multiplication%20and%20Array%20Multipliers.md).

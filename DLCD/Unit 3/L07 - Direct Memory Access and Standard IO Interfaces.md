@@ -1,8 +1,8 @@
 [DLCD Index](../README.md) / [Unit 3: Computer Structure and Organization](Introduction.md)
 
-# L08 - Direct Memory Access and Standard I/O Interfaces
+# L07 - Direct Memory Access and Standard IO Interfaces
 
-In Lecture 7, we saw how hardware interrupts liberate the processor from the wasteful spin-loops of polling. Interrupt-driven I/O is the perfect solution for low-bandwidth devices like keyboards, mice, and temperature sensors.
+In the previous lecture, we saw how hardware interrupts liberate the processor from the wasteful spin-loops of polling. Interrupt-driven I/O is the perfect solution for low-bandwidth devices like keyboards, mice, and temperature sensors.
 
 Now consider high-bandwidth devices: an NVMe Solid-State Drive reading a 4-gigabyte movie, a Gigabit Ethernet interface streaming video packets, or a graphics card rendering textures. 
 
@@ -203,4 +203,4 @@ In 1996, the industry introduced **USB (Universal Serial Bus)**:
 
 ---
 
-Both CPU execution and DMA transfers converge on a single critical resource: **Primary RAM**. How is primary memory internally organized? How do microscopic capacitor cells store bits, and why do dynamic memories require refresh circuitry? In the final lecture of Unit 3, we analyze [**Semiconductor RAM Memories**](L09%20-%20Semiconductor%20RAM%20Memories.md), contrasting SRAM with DRAM and exploring multi-bank memory hierarchies.
+Both CPU execution and DMA transfers converge on a single critical resource: **Primary RAM**. How is primary memory internally organized? How do microscopic capacitor cells store bits, and why do dynamic memories require refresh circuitry? In the final lecture of Unit 3, we analyze [**Semiconductor RAM Memories**](L08%20-%20Semiconductor%20RAM%20Memories.md), contrasting SRAM with DRAM and exploring memory chip expansion.

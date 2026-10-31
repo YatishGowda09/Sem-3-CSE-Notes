@@ -1,6 +1,6 @@
 [DLCD Index](../README.md) / [Unit 2: Synchronous Sequential Logic](Introduction.md)
 
-# L08 - Ripple Counters
+# Ripple Counters
 
 In the previous lecture, we examined registers that store and shift arbitrary data words. Now we turn to circuits that autonomously advance through a fixed sequence of numeric states: **Counters**.
 
@@ -213,4 +213,4 @@ These two limitations—low operating frequency and decoding glitches—make rip
 
 ---
 
-To overcome the ripple delay bottleneck, high-speed computers use counters where all flip-flops are clocked simultaneously by the master clock. In the next lecture, we analyze [**Synchronous Counters**](L09%20-%20Synchronous%20Counters.md), examining 4-bit parallel carry counters, synchronous up/down architectures, and arbitrary non-binary sequence synthesis.
+To overcome the ripple delay bottleneck, high-speed computers use counters where all flip-flops are clocked simultaneously by the master clock. In the next lecture, we analyze [**Synchronous Counters**](L07%20-%20Synchronous%20Counters.md), examining 4-bit parallel carry counters, synchronous up/down architectures, and arbitrary non-binary sequence synthesis.

@@ -310,7 +310,7 @@ Now, suppose you connect an arbitrary incoming data stream to pin $E$, and use $
 - When $AB = 00$, $D_0 = E$ (the input data appears on line $D_0$), while $D_1 = D_2 = D_3 = 0$.
 - When $AB = 01$, $D_1 = E$, while all others are 0.
 
-The circuit acts as a **1-to-4 Demultiplexer**! Because of this complete physical identity, commercial IC manufacturers label these chips interchangeably as **Decoder / Demultiplexer** (for instance, the 74LS138 is formally named "3-to-8 Line Decoder / Demultiplexer").
+The circuit acts as a **1-to-4 Demultiplexer**! Because of this complete structural identity, decoders with enable inputs are frequently called **Decoder / Demultiplexers**.
 
 ---
 
@@ -318,7 +318,7 @@ The circuit acts as a **1-to-4 Demultiplexer**! Because of this complete physica
 
 With multiplexers and demultiplexers, we have completed our journey through Unit 1. Let's look back at the architectural chain we built:
 
-1. **Boolean Algebra & Gates**: We established Huntington's postulates, DeMorgan's laws, and algebraic simplification.
+1. **Boolean Algebra & Gates**: We established basic Boolean postulates, DeMorgan's laws, and algebraic simplification.
 2. **Canonical Forms & K-Maps**: We learned to represent truth tables as sums of minterms and systematically minimize gate count using geometric Gray code maps with Don't Care optimizations.
 3. **Universal Gates**: We proved that any digital circuit can be fabricated exclusively using NAND or NOR silicon.
 4. **Arithmetic Data Paths**: We synthesized Half Adders, Full Adders, 4-bit Ripple Carry Adders, 2's complement Adder-Subtractors, BCD Decimal Adders, and Array Multipliers.
@@ -345,4 +345,4 @@ Combinational circuits have **no memory**. They cannot remember what happened a 
 
 Computers cannot function on combinational logic alone. A processor must store the result of an addition, hold the current instruction being executed, count clock cycles, and retain data in registers. To store information, circuits must possess **memory**. 
 
-We now transition to **Unit 2: Synchronous Sequential Logic**. Begin by reading the [**Unit 2 Introduction and Roadmap**](../Unit%202/Introduction.md), and then dive into [**L01 - Latches and Storage Elements**](../Unit%202/L01%20-%20Latches%20and%20Storage%20Elements.md) to discover how introducing feedback into combinational gates creates bistable memory elements.
+We now transition to **Unit 2: Synchronous Sequential Logic**. Begin by reading the [**Unit 2 Introduction and Roadmap**](../Unit%202/Introduction.md), and then dive into [**L01 - Storage Elements - Latches and Flip-Flops**](../Unit%202/L01%20-%20Storage%20Elements%20-%20Latches%20and%20Flip-Flops.md) to discover how introducing feedback into combinational gates creates bistable memory elements.

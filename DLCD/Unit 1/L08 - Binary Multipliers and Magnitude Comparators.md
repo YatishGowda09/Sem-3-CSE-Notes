@@ -275,18 +275,18 @@ flowchart TD
 
 ---
 
-## Cascading Magnitude Comparators (The 7485 Architecture)
+## Cascading Magnitude Comparators for Larger Word Sizes
 
-In practical digital design, we often need to compare 8-bit, 16-bit, or 32-bit values. We do not design massive custom 32-bit K-maps; we cascade standard 4-bit comparator integrated circuits (such as the classic **TTL 7485**).
+In practical digital systems, we often need to compare 8-bit, 16-bit, or 32-bit values. Instead of designing massive 16-variable or 32-variable K-maps, we cascade standard 4-bit comparator blocks.
 
-To allow cascading, a 4-bit comparator chip includes three **cascading inputs**:
+To allow modular cascading, each 4-bit comparator block includes three **cascading inputs**:
 - $I_{A > B}$ (Input indicating $A > B$ from the lower-order stage)
 - $I_{A = B}$ (Input indicating $A = B$ from the lower-order stage)
 - $I_{A < B}$ (Input indicating $A < B$ from the lower-order stage)
 
-How do these inputs interact with the chip's internal logic?
-- If the current 4-bit stage detects a difference ($A > B$ or $A < B$), its local bits decide the outcome immediately. The cascading inputs from the lower stage are completely ignored.
-- However, if the current 4-bit stage finds that its own bits are equal ($A = B$), it cannot make the final decision alone. It looks at the cascading inputs and passes them directly to its outputs!
+How do these inputs interact with the block's internal logic?
+- If the current upper 4-bit stage detects a difference ($A > B$ or $A < B$), its local bits decide the outcome immediately. The cascading inputs from the lower stage are completely ignored.
+- However, if the current upper 4-bit stage finds that its own bits are equal ($A = B$), it cannot make the final decision alone. It looks at the cascading inputs and passes them directly to its outputs.
 
 For an 8-bit comparator using two 4-bit blocks:
 1. Stage 0 (Lower 4 bits, $A_{3..0}$ and $B_{3..0}$) has its cascading inputs tied to fixed values:
@@ -298,7 +298,7 @@ For an 8-bit comparator using two 4-bit blocks:
 ```mermaid
 flowchart LR
     subgraph Stage0["Lower 4-Bit Comparator (Bits 3..0)"]
-        TieEQ["I(A=B) = 1"] --> C0["7485 Stage 0"]
+        TieEQ["I(A=B) = 1"] --> C0["Stage 0 Comparator"]
         TieGT["I(A&gt;B) = 0"] --> C0
         TieLT["I(A&lt;B) = 0"] --> C0
         A_low["A[3:0]"] --> C0
@@ -306,7 +306,7 @@ flowchart LR
     end
 
     subgraph Stage1["Upper 4-Bit Comparator (Bits 7..4)"]
-        A_high["A[7:4]"] --> C1["7485 Stage 1"]
+        A_high["A[7:4]"] --> C1["Stage 1 Comparator"]
         B_high["B[7:4]"] --> C1
     end
 

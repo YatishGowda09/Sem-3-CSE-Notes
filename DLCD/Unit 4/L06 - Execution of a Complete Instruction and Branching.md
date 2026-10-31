@@ -1,8 +1,8 @@
 [DLCD Index](../README.md) / [Unit 4: Computer Arithmetic and Control Design](Introduction.md)
 
-# L07 - Execution of a Complete Instruction
+# L06 - Execution of a Complete Instruction and Branching
 
-In Lecture 6, we analyzed the individual building blocks of the processor data path: register gating, temporary buffers $Y$ and $Z$, and memory handshakes.
+In Lecture 5, we analyzed the individual building blocks of the processor data path: register gating, temporary buffers $Y$ and $Z$, and memory handshakes.
 
 Now we assemble these micro-operations into complete, cohesive machine instructions. What microscopic electronic signals are triggered on clock tick 1? What happens on clock tick 2? And how does the Control Unit dynamically branch the Program Counter when an `if` condition evaluates to true?
 
@@ -150,7 +150,7 @@ When you aggregate the control steps across all instructions supported by the CP
 This table defines the master blueprint of the computer. Each row corresponds to a timing step ($T_k$), and each column corresponds to a specific physical control wire:
 
 | Timing Step | $\text{PC}_{\text{out}}$ | $\text{MAR}_{\text{in}}$ | $\text{READ}$ | $Z_{\text{in}}$ | $Z_{\text{out}}$ | $\text{PC}_{\text{in}}$ | $Y_{\text{in}}$ | $\text{MDR}_{\text{out}}$ | $\text{IR}_{\text{in}}$ | $R_{3\text{out}}$ | $R_{1\text{in}}$ | $\text{End}$ |
-| :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: |
+| :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: |
 | **$T_1$ (All)** | **1** | **1** | **1** | **1** | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 |
 | **$T_2$ (All)** | 0 | 0 | 0 | 0 | **1** | **1** | **1** | 0 | 0 | 0 | 0 | 0 |
 | **$T_3$ (All)** | 0 | 0 | 0 | 0 | 0 | 0 | 0 | **1** | **1** | 0 | 0 | 0 |
@@ -159,7 +159,7 @@ This table defines the master blueprint of the computer. Each row corresponds to
 | **$T_6$ (Add)** | 0 | 0 | 0 | **1** | 0 | 0 | 0 | **1** | 0 | 0 | 0 | 0 |
 | **$T_7$ (Add)** | 0 | 0 | 0 | 0 | **1** | 0 | 0 | 0 | 0 | 0 | **1** | **1** |
 
-To design the physical Control Unit, an engineer simply derives the Boolean logic equation for each column! For example, when should the wire $\text{MAR}_{\text{in}}$ be driven high?
+To design the physical Control Unit, an engineer simply derives the Boolean logic equation for each column:
 $$\mathbf{\text{MAR}_{\text{in}} = T_1 + T_4 \cdot \text{Add} + T_4 \cdot \text{Move} + \dots}$$
 
 This is the exact algebraic bridge that transforms high-level assembly execution into physical hardware logic gates.
@@ -176,4 +176,4 @@ This is the exact algebraic bridge that transforms high-level assembly execution
 
 ---
 
-In our single-bus architecture, an addition like `Add R1, R2, R3` took three full clock steps because only one operand could travel across the bus at a time. What if we added more buses? In the next lecture, we analyze [**Multiple-Bus Organization**](L08%20-%20Multiple-Bus%20Organization.md), discovering how a Three-Bus CPU architecture executes complete register additions in a single clock cycle.
+In our single-bus architecture, an addition like `Add R1, R2, R3` took three full clock steps because only one operand could travel across the bus at a time. What if we added more buses? And how does physical hardware actually generate the control pulses $T_1, T_2, \dots$ that drive the entire machine? In the final lecture of Unit 4, we examine [**Multiple-Bus Organization and Control Unit Design**](L07%20-%20Multiple-Bus%20Organization%20and%20Control%20Unit%20Design.md), contrasting Hardwired Control with Microprogrammed Control.

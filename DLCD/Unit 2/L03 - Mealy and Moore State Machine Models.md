@@ -1,6 +1,6 @@
 [DLCD Index](../README.md) / [Unit 2: Synchronous Sequential Logic](Introduction.md)
 
-# L04 - Mealy and Moore State Machine Models
+# Mealy and Moore State Machine Models
 
 Every synchronous sequential circuit is an implementation of a mathematical abstraction known as a **Finite State Machine (FSM)**. A finite state machine processes a stream of inputs over discrete clock cycles, transitions through a predetermined finite set of internal states, and generates outputs.
 
@@ -241,4 +241,4 @@ In a Moore machine, the output logic is driven exclusively by flip-flop outputs.
 
 ---
 
-Regardless of whether we choose a Mealy or Moore architecture, our initial state diagram often contains redundant or duplicate states. In silicon manufacturing, every unnecessary state means extra flip-flops and extra gates. In the next lecture, we master [**State Reduction and State Assignment**](L05%20-%20State%20Reduction%20and%20State%20Assignment.md), using systematic row reduction and implication tables to strip out redundant states before assigning optimal binary codes.
+Regardless of whether we choose a Mealy or Moore architecture, our initial state diagram often contains redundant or duplicate states. In silicon manufacturing, every unnecessary state means extra flip-flops and extra gates. In the next lecture, we master [**State Reduction, State Assignment, and Sequential Design**](L04%20-%20State%20Reduction,%20State%20Assignment,%20and%20Sequential%20Design.md), using systematic row reduction and state assignment to strip out redundant states before synthesizing hardware with flip-flops.

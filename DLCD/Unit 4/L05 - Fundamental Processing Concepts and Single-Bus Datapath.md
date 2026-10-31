@@ -1,6 +1,6 @@
 [DLCD Index](../README.md) / [Unit 4: Computer Arithmetic and Control Design](Introduction.md)
 
-# L06 - Fundamental Processing Concepts
+# L05 - Fundamental Processing Concepts and Single-Bus Datapath
 
 In Unit 3, we treated the Central Processing Unit as a unified module that fetches instructions and reads/writes memory. Now, we open the silicon lid and step directly inside the CPU.
 
@@ -130,7 +130,6 @@ The complete addition requires exactly **three clock steps**.
 ---
 
 ### 3. Fetching a Word from Memory
-
 Communication with external RAM requires interfacing through the **MAR** (address) and **MDR** (data).
 
 Because primary RAM is located off-chip, a memory read takes longer than an internal register transfer. The CPU must wait for the memory controller to assert the **Memory Function Completed (MFC)** handshake signal.
@@ -150,7 +149,6 @@ Let's trace the hardware handshake:
 ---
 
 ### 4. Storing a Word into Memory
-
 To store the contents of register $R_2$ into memory address $[R_1]$ ($\text{Memory}[R_1] \leftarrow R_2$):
 
 $$\mathbf{T_1: \quad R_{1\text{out}}, \; \text{MAR}_{\text{in}}}$$
@@ -174,4 +172,4 @@ $$\mathbf{T_3: \quad \text{WMFC}}$$
 
 ---
 
-Now that we understand the atomic micro-operations of register transfers, ALU calculations, and memory reads/writes, how does a complete instruction execute from start to finish? In the next lecture, we dissect the [**Execution of a Complete Instruction**](L07%20-%20Execution%20of%20a%20Complete%20Instruction.md), writing clock-cycle control sequences for ALU operations, memory loads, and conditional branches.
+Now that we understand the atomic micro-operations of register transfers, ALU calculations, and memory reads/writes, how does a complete instruction execute from start to finish? In the next lecture, we dissect the [**Execution of a Complete Instruction and Branching**](L06%20-%20Execution%20of%20a%20Complete%20Instruction%20and%20Branching.md), writing clock-cycle control sequences for ALU operations, memory loads, and conditional branches.

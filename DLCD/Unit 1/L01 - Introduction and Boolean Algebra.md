@@ -89,32 +89,30 @@ The OR operation yields a $1$ if **at least one** of its inputs is $1$. The outp
 
 ---
 
-## Axiomatic Definition of Boolean Algebra: Huntington's Postulates
+## Postulates and Basic Properties of Boolean Algebra
 
-In 1904, mathematician Edward V. Huntington formulated a set of axioms that formally define Boolean algebra over a set of elements $B$, two binary operators $+$ and $\cdot$, and a unary complement operator $'$:
+Boolean algebra is defined over a two-element set $B = \{0, 1\}$, two binary operators $+$ (logical OR) and $\cdot$ (logical AND), and a unary operator $'$ (logical NOT). Just as standard arithmetic follows basic arithmetic rules, Boolean algebra is governed by a core set of operational postulates:
 
 1. **Closure**:
-   - For all $x, y \in B$, $x + y \in B$.
+   - For all $x, y \in B$, $x + y \in B$ (the result is always a valid binary bit).
    - For all $x, y \in B$, $x \cdot y \in B$.
 2. **Identity Elements**:
-   - There exists an identity element with respect to $+$, denoted $0$: $x + 0 = x$.
-   - There exists an identity element with respect to $\cdot$, denoted $1$: $x \cdot 1 = x$.
-3. **Commutativity**:
+   - $0$ is the identity element for OR: $x + 0 = x$.
+   - $1$ is the identity element for AND: $x \cdot 1 = x$.
+3. **Commutative Laws**:
    - $x + y = y + x$
    - $x \cdot y = y \cdot x$
-4. **Distributivity**:
-   - $\cdot$ distributes over $+$: $x \cdot (y + z) = (x \cdot y) + (x \cdot z)$
-   - **Crucial Dual**: $+$ distributes over $\cdot$: 
+4. **Distributive Laws**:
+   - AND distributes over OR: $x \cdot (y + z) = (x \cdot y) + (x \cdot z)$
+   - OR distributes over AND: 
 
      $$x + (y \cdot z) = (x + y) \cdot (x + z)$$
 
-   *(Notice this second distributive law! In ordinary algebra, addition does not distribute over multiplication: $2 + (3 \times 4) \neq (2 + 3) \times (2 + 4)$. In Boolean algebra, it strictly holds true).*
-5. **Complement**:
-   - For every element $x \in B$, there exists an element $x' \in B$ such that:
+   Notice this second distributive property. In ordinary decimal algebra, addition does not distribute over multiplication ($2 + (3 \times 4) \neq (2 + 3) \times (2 + 4)$). But in Boolean algebra, it strictly holds true and serves as a powerful algebraic simplification tool.
+5. **Complement Laws**:
+   - For every binary variable $x$, there exists an inverse $x'$ such that:
      $$x + x' = 1$$
      $$x \cdot x' = 0$$
-6. **Distinct Elements**:
-   - There exist at least two elements $x, y \in B$ such that $x \neq y$.
 
 ---
 

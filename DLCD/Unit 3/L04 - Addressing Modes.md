@@ -218,4 +218,4 @@ By eliminating complex memory addressing modes, RISC instructions fit into unifo
 
 ---
 
-Now that we know how instructions locate operands in memory, how do software programs actually coordinate execution, invoke functions, pass parameters, and return results? In the next lecture, we analyze [**Assembly Language and Program Execution**](L05%20-%20Assembly%20Language%20and%20Program%20Execution.md), examining subroutine linkage, the processor stack frame, and assembler directives.
+Now that we know how instructions locate operands in memory, how do software programs actually coordinate execution, translate symbolic instructions, and structure memory? In the next lecture, we analyze [**Assembly Language and Program Execution**](L05%20-%20Assembly%20Language%20and%20Program%20Execution.md), examining assembly language syntax, assembler directives, two-pass translation, and program loading.
