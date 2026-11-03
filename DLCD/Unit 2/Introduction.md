@@ -1,43 +1,32 @@
 [DLCD Index](../README.md)
 
-# Unit 2: Synchronous Sequential Logic, Registers, and Counters
+# Unit 2: Digital Building Blocks and Finite State Machines
 
-Welcome to Unit 2 of **Digital Logic and Computer Design**.
+Welcome to Unit 2 of **Digital Logic and Computer Design** (`UE25CS251A`), structured directly around the PES University syllabus and David Money Harris & Sarah L. Harris (*Digital Design and Computer Architecture*, 2nd Edition, Morgan Kaufmann / Elsevier).
 
-In Unit 1, every circuit we designed was strictly **combinational**: its outputs depended entirely and instantaneously on the current values applied to its inputs. Combinational circuits have no memory. They cannot track sequence, retain a previous arithmetic result, or coordinate actions that occur in a specific order over time.
-
-Real computers, however, are fundamentally **state machines**. When an operating system boots, or when a processor steps through the instruction cycle, the hardware must maintain memory of where it is in the execution flow. 
-
-Unit 2 introduces **Sequential Logic**, where circuits incorporate **memory elements** and **feedback paths**. In sequential circuits, the outputs depend not only on the current inputs, but also on the circuit's **present state** (its stored history). We focus on **synchronous** sequential circuits, where all state transitions across the entire machine are coordinated by a periodic master timing signal: the **system clock**.
+In Unit 1, we learned how to minimize Boolean logic and build edge-triggered flip-flops to hold individual bits. Now in Unit 2, we ascend to higher levels of abstraction. We combine combinational logic and clocked registers to construct the two most critical subsystems of any computer:
+1. **Control Units**: Governed by **Finite State Machines (FSMs)** that step through algorithmic operational states and orchestrate datapath actions.
+2. **Datapaths**: Governed by high-speed **Arithmetic Circuits** (adders, subtractors, comparators, multipliers, and Arithmetic Logic Units) and standardized **Number Representations** (2's complement integers, fixed-point fractions, and IEEE 754 floating-point standards).
 
 ---
 
 ## Unit 2 Roadmap
 
-The lectures in this unit build systematically from cross-coupled physical gates to synchronous registers and counting machines:
-
-- [**L01 - Storage Elements - Latches and Flip-Flops**](L01%20-%20Storage%20Elements%20-%20Latches%20and%20Flip-Flops.md) — The physics of feedback and bistability, SR Latch using NOR and NAND gates, the forbidden state hazard, Gated D Latch, the transparency race-around problem, edge-triggering, Master-Slave architecture, Edge-Triggered D, JK, and T flip-flops, characteristic equations, and excitation tables.
-- [**L02 - Analysis of Clocked Sequential Circuits**](L02%20-%20Analysis%20of%20Clocked%20Sequential%20Circuits.md) — The systematic 5-step analysis pipeline: flip-flop input equations, output equations, next-state equations, state tables, and state diagrams.
-- [**L03 - Mealy and Moore State Machine Models**](L03%20-%20Mealy%20and%20Moore%20State%20Machine%20Models.md) — Classical Finite State Machine (FSM) models: Moore machines (outputs depend only on state) vs. Mealy machines (outputs depend on state and inputs), timing comparisons, clock-to-output latency, and glitch vulnerability.
-- [**L04 - State Reduction, State Assignment, and Sequential Design**](L04%20-%20State%20Reduction,%20State%20Assignment,%20and%20Sequential%20Design.md) — Minimizing sequential hardware: state equivalence theorems, row-matching state reduction, binary/Gray/one-hot state assignments, and the complete 7-stage sequential design procedure (sequence detector synthesis using D and JK flip-flops with self-starting verification).
-- [**L05 - Registers and Shift Registers**](L05%20-%20Registers%20and%20Shift%20Registers.md) — Multi-bit data storage: why clock gating causes dangerous clock skew, 4-bit register with parallel load (using input multiplexers), shift registers (SISO, SIPO, PISO, PIPO), serial transfer, and serial addition.
-- [**L06 - Ripple Counters**](L06%20-%20Ripple%20Counters.md) — Asynchronous counters: 4-bit binary ripple up-counters, down-counters, BCD ripple counters, propagation delay accumulation ($n \cdot t_{pd}$), and maximum operating frequency limits.
-- [**L07 - Synchronous Counters**](L07%20-%20Synchronous%20Counters.md) — High-speed parallel counters: 4-bit binary synchronous up-counter with enable chain logic, and arbitrary non-binary sequence counter synthesis using excitation tables.
-- [**L08 - Ring Counter and Johnson Counter**](L08%20-%20Ring%20Counter%20and%20Johnson%20Counter.md) — Specialized non-binary counters: Ring counters (circulating single-bit timing signals with zero decoding gates), Johnson (twisted-ring) counters ($2N$ states with glitch-free 2-input AND decoding), and counter architecture comparisons.
+- [**L01 - Finite State Machines - Mealy and Moore Models**](L01%20-%20Finite%20State%20Machines%20-%20Mealy%20and%20Moore%20Models.md) — The formal structure of synchronous Finite State Machines: state registers, next-state logic, and output logic. Moore vs. Mealy machine architectures, state transition diagrams, state tables, state encoding strategies (binary vs. one-hot), and comprehensive case studies: Ben Bitdiddle's campus traffic light controller, the divide-by-3 counter, and sequence detectors.
+- [**L02 - Arithmetic Circuits**](L02%20-%20Arithmetic%20Circuits.md) — The mathematical engine of the CPU: Half Adders, Full Adders, Ripple Carry Adders (RCA), Carry-Lookahead Adders (CLA) with generate and propagate logic, prefix adders, 2's complement adder-subtractors, magnitude comparators, shifter architectures (logical, arithmetic, barrel), 4x4 array multipliers, and multi-function Arithmetic Logic Units (ALUs) with Set-Less-Than (SLT) comparison.
+- [**L03 - Number Systems and Floating-Point Representation**](L03%20-%20Number%20Systems%20and%20Floating-Point%20Representation.md) — How digital circuits represent real-world mathematics: unsigned binary, 2's complement signed integers, fixed-point fractional notation, the IEEE 754 Floating-Point Standard (Single-Precision 32-bit and Double-Precision 64-bit), biased exponents, implicit leading 1s, special numerical encodings ($\pm 0, \pm \infty, \text{NaN}$, denormals), rounding modes, and step-by-step floating-point addition tracing.
 
 ---
 
 ## Objectives
 
-- Understand how cross-coupled feedback transforms memoryless combinational gates into bistable storage elements.
-- Analyze the critical distinction between level-sensitive latches and edge-triggered flip-flops.
-- Master the operational characteristics, characteristic equations, and excitation tables of D, JK, and T flip-flops.
-- Execute the complete analysis pipeline for clocked sequential circuits to extract state diagrams from gate schematics.
-- Distinguish between Mealy and Moore finite state machines and evaluate their timing and architectural trade-offs.
-- Apply state reduction and state assignment methods to minimize hardware cost.
-- Synthesize complex sequential controllers from word specifications using systematic design procedures.
-- Design registers, shift registers, asynchronous ripple counters, synchronous counters, ring counters, and Johnson counters.
+- Design, analyze, and synthesize synchronous Finite State Machines using both Moore and Mealy models.
+- Formulate state transition diagrams and derive next-state and output Boolean equations using binary and one-hot state encodings.
+- Evaluate the critical-path propagation delays of Ripple Carry Adders versus Carry-Lookahead Adders.
+- Synthesize an integrated multi-function ALU capable of addition, subtraction, bitwise logic, and conditional comparison (`SLT`).
+- Encode signed real numbers into fixed-point and IEEE 754 single-precision floating-point formats.
+- Trace step-by-step floating-point addition, including exponent alignment, mantissa addition, normalization, and rounding.
 
 ---
 
-Let's begin by discovering how a simple loop of silicon wires can preserve a bit of information forever. Read [**L01 - Storage Elements - Latches and Flip-Flops**](L01%20-%20Storage%20Elements%20-%20Latches%20and%20Flip-Flops.md).
+Let's begin by examining how digital systems make stateful decisions. Read [**L01 - Finite State Machines - Mealy and Moore Models**](L01%20-%20Finite%20State%20Machines%20-%20Mealy%20and%20Moore%20Models.md).

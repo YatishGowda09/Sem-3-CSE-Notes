@@ -14,7 +14,7 @@ The vault covers 5 complete university subjects, organized by lecture decks and 
 | :--- | :--- | :--- | :--- | :--- |
 | **Operating Systems** | [`OS/`](OS/README.md) | 4 | 44 Lectures | Process lifecycle, CPU scheduling, IPC, POSIX multithreading, synchronization primitives, deadlocks, virtual memory & paging, file systems, disk scheduling, and security access matrices. |
 | **Computer Networks** | [`CN/`](CN/README.md) | 4 | 41 Lectures | The 5-layer Internet model, HTTP/HTTPS, DNS, socket programming, reliable transport (`rdt 1.0` to `3.0`), TCP congestion control, IPv4/IPv6, subnetting & CIDR, routing algorithms (Dijkstra, Distance Vector), CSMA/CD, and Ethernet switching. |
-| **Digital Logic & Computer Design** (`UE25CS251A`) | [`DLCD/`](DLCD/README.md) | 4 | 34 Lectures | Boolean algebra, K-map minimization, universal gate logic, adders & multipliers, multiplexers, latches & flip-flops, Mealy/Moore FSMs, counters, computer organization, single/multi-bus CPU datapath, and control unit design. |
+| **Digital Logic & Computer Design** (`UE25CS251A`) | [`DLCD/`](DLCD/README.md) | 4 | 24 Lectures | Digital abstraction, Boolean algebra & K-maps, multiplexers & decoders, latches & flip-flops, synchronous timing, Mealy/Moore FSMs, arithmetic circuits, IEEE 754 floating-point, memory arrays, MIPS architecture & assembly programming, Amdahl's Law, and Single-Cycle, Multi-Cycle, and Pipelined MIPS microarchitectures. |
 | **Data Structures & Applications** | [`DSA/`](DSA/README.md) | 4 | 37 Lectures | Pointers & dynamic memory (`malloc`/`free`), linked lists (singly, doubly, circular, header, skip lists), stacks & queues, tree traversals, BST, AVL trees with rotations, splay trees, heaps, graphs (BFS, DFS, Dijkstra), hashing, and tries. Complete with runnable C code and Big-O tables. |
 | **Mathematical Foundation for AI & Data Science** | [`Maths/`](Maths/README.md) | 4 | 37 Lectures | **Linear Algebra**: Systems $A\mathbf{x}=\mathbf{b}$, Gaussian elimination, LU decomposition, Four Fundamental Subspaces, projections, Least Squares, Gram-Schmidt & QR, eigenvalues, Spectral Theorem, SVD & PCA.<br>**Probability & Statistics**: Sampling models (tangible vs conceptual), random variables, CLT, point estimation (MSE), MLE, MAP, confidence intervals, $Z$/$t$-tests, ANOVA, and Chi-Square tests. |
 
@@ -55,10 +55,10 @@ Any editor with a Markdown previewer supporting Mermaid and MathJax will render 
   - [Unit 4: Network Layer Control Plane and the Link Layer](CN/Unit%204/Introduction.md)
 
 - **[Digital Logic & Computer Design (DLCD) Index](DLCD/README.md)** — [Topic Listing](DLCD/INDEX.md)
-  - [Unit 1: Combinational Logic Design and Gate-Level Minimization](DLCD/Unit%201/Introduction.md)
-  - [Unit 2: Synchronous Sequential Logic, Registers, and Counters](DLCD/Unit%202/Introduction.md)
-  - [Unit 3: Basic Computer Structure, Addressing Modes, I/O, and Memory](DLCD/Unit%203/Introduction.md)
-  - [Unit 4: Computer Arithmetic and Processing Unit Design](DLCD/Unit%204/Introduction.md)
+  - [Unit 1: Combinational and Sequential Logic Design](DLCD/Unit%201/Introduction.md)
+  - [Unit 2: Digital Building Blocks and Finite State Machines](DLCD/Unit%202/Introduction.md)
+  - [Unit 3: Sequential Blocks, Memory Arrays, and Architecture](DLCD/Unit%203/Introduction.md)
+  - [Unit 4: Microarchitecture - Single-Cycle, Multi-Cycle, and Pipelined Processors](DLCD/Unit%204/Introduction.md)
 
 - **[Data Structures and Applications (DSA) Index](DSA/README.md)** — [Topic Listing](DSA/INDEX.md)
   - [Unit 1: Pointers, Memory Allocation, Linked Lists, and Stacks](DSA/Unit%201/Introduction.md)

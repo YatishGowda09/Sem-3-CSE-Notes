@@ -1,45 +1,38 @@
 [DLCD Index](../README.md)
 
-# Unit 4: Computer Arithmetic and Processing Unit / Control Unit Design
+# Unit 4: Microarchitecture - Single-Cycle, Multi-Cycle, and Pipelined Processors
 
-Welcome to Unit 4 of **Digital Logic and Computer Design**.
+Welcome to Unit 4 of **Digital Logic and Computer Design** (`UE25CS251A`), structured directly around the PES University syllabus and David Money Harris & Sarah L. Harris (*Digital Design and Computer Architecture*, 2nd Edition, Morgan Kaufmann / Elsevier).
 
-In Units 1, 2, and 3, we built up from individual transistors and Boolean logic gates, through synchronous sequential flip-flops and registers, to the system-level architecture of memories, buses, and assembly instructions.
+In Unit 3, we studied the MIPS Instruction Set Architecture (ISA)—the programmer's view of the machine. Now, in this culminating unit of the course, we step behind the curtain into **Microarchitecture**: the actual hardware design that brings the ISA to life in silicon.
 
-Unit 4 is the computational and control climax of the entire subject. Here, we step directly inside the Central Processing Unit to answer the two ultimate engineering questions:
-1. **How does the ALU compute complex arithmetic at wire speed?** 
-   How do combinational array multipliers multiply unsigned integers, how do sequential circuits multiply signed numbers using Booth's algorithm, how do Wallace Trees compress partial products with Carry-Save Addition, how do Restoring and Non-Restoring dividers calculate quotients, and how does the IEEE 754 Floating-Point standard represent fractional scientific numbers?
-2. **How does the Control Unit orchestrate the processor data path?**
-   How do internal processor buses move data between registers and the ALU, what microscopic control steps execute an instruction like `Add (R3), R1`, how does multiple-bus organization enable single-cycle ALU execution, and how do we physically synthesize the control unit—using high-speed **Hardwired combinational logic** or flexible **Microprogrammed ROM firmware**?
+We construct three complete processor microarchitectures for a representative subset of MIPS instructions (`add`, `sub`, `and`, `or`, `slt`, `lw`, `sw`, `beq`, and `j`):
+1. **The Single-Cycle Processor**: Executes an entire instruction in one long clock cycle. Simple to understand, but speed is penalized by the slowest instruction.
+2. **The Multi-Cycle Processor**: Breaks instructions into multiple shorter clock cycles, reusing a single shared ALU and memory array through finite state machine control.
+3. **The Pipelined Processor**: Overlaps the execution of five instructions simultaneously across dedicated pipeline stages, achieving an ideal throughput of one instruction per clock cycle while resolving structural, data, and control hazards.
 
 ---
 
 ## Unit 4 Roadmap
 
-The lectures in this unit build systematically from high-speed arithmetic data paths to complete control unit synthesis:
-
-- [**L01 - Unsigned Multiplication and Array Multipliers**](L01%20-%20Unsigned%20Multiplication%20and%20Array%20Multipliers.md) — Combinational array multipliers, generating partial products with AND gates, summing with Full Adders, component scaling ($n^2$ AND gates, $n(n-1)$ Full Adders), and deriving the worst-case propagation delay formula ($6(n-1)-1$).
-- [**L02 - Sequential Multiplication, Booth's Algorithm, and Fast Multiplication**](L02%20-%20Sequential%20Multiplication,%20Booth's%20Algorithm,%20and%20Fast%20Multiplication.md) — Sequential shift-and-add data paths reusing a single adder, Booth's algorithm for signed 2's complement multiplication via runs of ones, Radix-4 bit-pair recoding to halve summands ($n \to n/2$), and Carry-Save Addition (CSA 3:2 compressors) arranged in Wallace Trees for logarithmic addition time.
-- [**L03 - Integer Division - Restoring and Non-Restoring Algorithms**](L03%20-%20Integer%20Division%20-%20Restoring%20and%20Non-Restoring%20Algorithms.md) — Binary longhand division data path ($A, Q, M$), Restoring Division with trial subtractions and restoration additions, Non-Restoring Division eliminating restoration cycles via conditional shift-and-add, and final remainder correction.
-- [**L04 - Floating-Point Numbers and IEEE 754 Standard**](L04%20-%20Floating-Point%20Numbers%20and%20IEEE%20754%20Standard.md) — Fixed-point limitations, IEEE 754 Single (32-bit) and Double (64-bit) precision formats: Sign bit, Biased Exponent (Excess-127 / Excess-1023), Mantissa with hidden leading 1, special values (Zero, Denormals, $\pm \infty$, NaN), and floating-point arithmetic rules.
-- [**L05 - Fundamental Processing Concepts and Single-Bus Datapath**](L05%20-%20Fundamental%20Processing%20Concepts%20and%20Single-Bus%20Datapath.md) — Internal processor organization, single-bus CPU architecture, register gating signals ($R_{\text{in}}, R_{\text{out}}$), why temporary registers $Y$ and $Z$ are mandatory, ALU operations, and memory read/write handshakes via MAR, MDR, and WMFC.
-- [**L06 - Execution of a Complete Instruction and Branching**](L06%20-%20Execution%20of%20a%20Complete%20Instruction%20and%20Branching.md) — The universal instruction fetch phase ($T_1 - T_3$), clock-cycle control sequences for ALU operations (`Add (R3), R1`), memory loads (`Move (R1), R2`), and conditional branching (`Branch_if_zero`), and constructing the master Control Signal Activation Table.
-- [**L07 - Multiple-Bus Organization and Control Unit Design**](L07%20-%20Multiple-Bus%20Organization%20and%20Control%20Unit%20Design.md) — Three-Bus CPU architecture (Buses A, B, C) and multi-port register files enabling single-cycle ALU execution, complete processor structure, Hardwired Control synthesis using step counters and combinational logic matrices, and Microprogrammed Control (Maurice Wilkes) using Control Store ROMs, $\mu\text{PC}$, and horizontal vs. vertical microinstructions.
+- [**L01 - Microarchitecture Fundamentals and Performance Analysis**](L01%20-%20Microarchitecture%20Fundamentals%20and%20Performance%20Analysis.md) — Architectural state vs. microarchitecture, datapath and control decomposition, the classic execution time formula ($\text{Time} = I \times \text{CPI} \times T_c$), and the MIPS architectural instruction subset.
+- [**L02 - Single-Cycle MIPS Datapath Design**](L02%20-%20Single-Cycle%20MIPS%20Datapath%20Design.md) — Assembling the single-cycle hardware datapath incrementally: instruction fetch, register operand read, immediate sign-extension, ALU execution, memory access, branch target calculation, and jump logic into a unified circuit.
+- [**L03 - Single-Cycle MIPS Control Unit Design**](L03%20-%20Single-Cycle%20MIPS%20Control%20Unit%20Design.md) — Synthesizing the brain of the single-cycle CPU: Main Decoder, ALU Decoder, control signal truth tables, and critical-path delay analysis ($T_c$).
+- [**L04 - Multi-Cycle MIPS Datapath Design**](L04%20-%20Multi-Cycle%20MIPS%20Datapath%20Design.md) — Overcoming single-cycle limitations: hardware reuse, single unified memory array, single shared ALU, non-architectural internal registers (`IR`, `MDR`, `A`, `B`, `ALUOut`), and multiplexer steering.
+- [**L05 - Multi-Cycle MIPS Control Unit and State Machine**](L05%20-%20Multi-Cycle%20MIPS%20Control%20Unit%20and%20State%20Machine.md) — The multi-cycle control Finite State Machine: Fetch, Decode, Execute, Memory Access, and Writeback states, instruction CPI analysis, and performance trade-offs.
+- [**L06 - Pipelined MIPS Processor Architecture and Hazards**](L06%20-%20Pipelined%20MIPS%20Processor%20Architecture%20and%20Hazards.md) — The 5-stage RISC pipeline (IF, ID, EX, MEM, WB), pipeline registers, control propagation, and comprehensive hazard resolution: structural hazards, RAW data forwarding and load stalls, and branch control hazard flushing.
 
 ---
 
 ## Objectives
 
-- Understand the hardware trade-offs between combinational array multipliers and sequential shift-and-add data paths.
-- Execute Booth's algorithm and Bit-Pair (Radix-4) recoding for signed 2's complement multiplication.
-- Analyze Carry-Save Addition (CSA) and construct Wallace Tree reduction networks for ultra-fast multiplication.
-- Trace Restoring and Non-Restoring integer division algorithms on hardware registers.
-- Master the IEEE 754 Floating-Point representation, bias calculations, normalization, and arithmetic execution.
-- Trace microscopic register transfers across single-bus and multi-bus processor data paths.
-- Write clock-cycle control sequences for ALU operations, memory transfers, and conditional branch instructions.
-- Design Hardwired Control Units using step counters, instruction decoders, and combinational logic expressions.
-- Construct Microprogrammed Control Units using Control Store ROMs, microinstruction formats, and microprogram sequencing.
+- Calculate CPU execution time using the three fundamental performance variables ($I$, $\text{CPI}$, $T_c$).
+- Trace dataflow paths through the Single-Cycle MIPS datapath for R-type, memory, branch, and jump instructions.
+- Design Main Decoder and ALU Decoder combinational logic tables to control processor multiplexers and write-enable lines.
+- Synthesize the Finite State Machine controlling a Multi-Cycle MIPS processor.
+- Trace instruction progression through the 5 pipeline stages of a pipelined processor.
+- Resolve data hazards using forwarding and stalling, and control hazards using early branch evaluation and pipeline flushes.
 
 ---
 
-Let's begin by exploring how combinational arrays multiply binary numbers in hardware. Read [**L01 - Unsigned Multiplication and Array Multipliers**](L01%20-%20Unsigned%20Multiplication%20and%20Array%20Multipliers.md).
+Let's begin by examining microarchitectural performance analysis. Read [**L01 - Microarchitecture Fundamentals and Performance Analysis**](L01%20-%20Microarchitecture%20Fundamentals%20and%20Performance%20Analysis.md).
